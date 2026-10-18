@@ -486,14 +486,14 @@ function placeLabels(t,pts,r){
  const W=t.clientWidth||600,rows=[];let maxRow=0;
  pts.forEach(o=>{
   const txt=(o.n==sel?'▶ ':'')+o.n+' '+(r.k=='rps'?o.v.toFixed(0):f1(o.v))+r.unit;
-  const w=txt.length*(o.n==sel?9.4:7.8)+8,x=o.p/100*W,left=Math.min(Math.max(x,w/2),W-w/2);
-  let ri=0;while(rows[ri]!==undefined&&rows[ri]>left-w/2-8)ri++;
+  const ml=document.createElement('div');ml.className='ml';ml.style.color=catCol(AR[o.n].cat);ml.textContent=txt;ml.style.top='0px';ml.style.left='0px';
+  if(o.n==sel){ml.style.fontSize='.8rem';ml.style.fontWeight='800'}t.appendChild(ml);
+  const w=ml.offsetWidth+10,x=o.p/100*W,left=Math.min(Math.max(x,w/2),W-w/2);
+  let ri=0;while(rows[ri]!==undefined&&rows[ri]>left-w/2)ri++;
   rows[ri]=left+w/2;maxRow=Math.max(maxRow,ri);
-  const top=50+ri*19;
-  const cn=document.createElement('div');cn.className='cn';cn.style.left=x+'px';cn.style.top='36px';cn.style.height=(top-36)+'px';t.appendChild(cn);
-  const ml=document.createElement('div');ml.className='ml';ml.style.left=left+'px';ml.style.top=top+'px';ml.style.color=catCol(AR[o.n].cat);ml.textContent=txt;
-  if(o.n==sel){ml.style.fontSize='.8rem';ml.style.fontWeight='800'}t.appendChild(ml)});
- t.style.height=(50+(maxRow+1)*19+10)+'px'}
+  const top=50+ri*20;ml.style.left=left+'px';ml.style.top=top+'px';
+  const cn=document.createElement('div');cn.className='cn';cn.style.left=x+'px';cn.style.top='36px';cn.style.height=(top-36)+'px';t.insertBefore(cn,ml)});
+ t.style.height=(50+(maxRow+1)*20+10)+'px'}
 addEventListener('resize',()=>{clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(typeof drawTracks==='function')drawTracks()},150)});
 function drawTracks(){
  const box=document.getElementById('tracks');box.innerHTML='';
