@@ -491,9 +491,9 @@ function placeLabels(t,pts,r){
   const w=ml.offsetWidth+10,x=o.p/100*W,left=Math.min(Math.max(x,w/2),W-w/2);
   let ri=0;while(rows[ri]!==undefined&&rows[ri]>left-w/2)ri++;
   rows[ri]=left+w/2;maxRow=Math.max(maxRow,ri);
-  const top=50+ri*20;ml.style.left=left+'px';ml.style.top=top+'px';
+  const top=50+ri*24;ml.style.left=left+'px';ml.style.top=top+'px';
   const cn=document.createElement('div');cn.className='cn';cn.style.left=x+'px';cn.style.top='36px';cn.style.height=(top-36)+'px';t.insertBefore(cn,ml)});
- t.style.height=(50+(maxRow+1)*20+10)+'px'}
+ t.style.height=(50+(maxRow+1)*24+10)+'px'}
 addEventListener('resize',()=>{clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(typeof drawTracks==='function')drawTracks()},150)});
 function drawTracks(){
  const box=document.getElementById('tracks');box.innerHTML='';
