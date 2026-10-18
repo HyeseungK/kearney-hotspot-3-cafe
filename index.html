@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>어린이대공원 스페셜티 카페 제안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Noto+Serif+KR:wght@600;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 :root{--bg:#EFE5D6;--bg-s:#FAF5EC;--bg-e:#E6D9C5;--bdr:rgba(70,45,25,.14);--bdr-h:rgba(70,45,25,.30);--t1:#3A2A1E;--t2:#7A6552;--t3:#A8967F;
 --coral:#B5651D;--coral-a:rgba(181,101,29,.10);--sx:#5B7083;--yn:#A8967F;--yh:#6B8E5A;--grn:#5E8B4F;--dn:#B5483A;--gold:#A67C1A;
 --okbg:rgba(94,139,79,.16);--wrbg:rgba(166,124,26,.16);--nobg:rgba(181,72,58,.13);
@@ -17,7 +18,7 @@
 --nav-bg:rgba(26,19,13,.92);--shadow:none;--td:rgba(255,255,255,.05);--prog:rgba(255,255,255,.06)}
 html{scroll-behavior:smooth}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body,.nr,.chip,.nav,td,th{transition:background-color .22s ease,border-color .22s ease,color .18s ease,box-shadow .22s ease}
-body{background:var(--bg);color:var(--t1);font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic','Apple SD Gothic Neo',sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:80px;line-height:1.6}
+body{background:var(--bg);color:var(--t1);font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic','Apple SD Gothic Neo',sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:80px;line-height:1.6}
 .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 0}
 .nr{background:var(--bg-s);border:1px solid var(--bdr);border-radius:var(--r);box-shadow:var(--shadow)}
 .xbox{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rs);padding:12px}
@@ -27,7 +28,7 @@ body{background:var(--bg);color:var(--t1);font-family:'Pretendard',-apple-system
 .nav-in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;overflow-x:auto;height:50px}
 .nav a{font-size:.84rem;font-weight:600;color:var(--t2);text-decoration:none;padding:6px 12px;border-radius:8px;white-space:nowrap}
 .nav a:hover{color:var(--t1)}.nav a.on{color:var(--coral)}.nav .sp{flex:1}
-.tbtn{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:5px 12px;font:600 .78rem 'Pretendard',inherit;cursor:pointer}
+.tbtn{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:5px 12px;font:600 .78rem 'Noto Sans KR',inherit;cursor:pointer}
 .pt{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--prog)}.pb{height:100%;width:0;background:var(--coral);transition:width .1s linear}
 /* hero */
 .hdr{margin-bottom:28px;position:relative;padding:30px 28px 26px;border-radius:var(--r);border:1px solid var(--bdr);overflow:hidden;background:repeating-linear-gradient(90deg,rgba(120,80,40,.05) 0 2px,transparent 2px 52px),linear-gradient(180deg,#F4EAD8,#E9DBC4);box-shadow:var(--shadow)}
@@ -73,12 +74,12 @@ ul{padding-left:18px}li{margin:4px 0;font-size:.9rem}
 @media(max-width:640px){.tl{grid-template-columns:1fr}.tl>div,.tl>div:first-child,.tl>div:last-child{border-radius:8px;margin-bottom:6px}}
 /* map */
 #map{height:440px;border-radius:var(--rs);border:1px solid var(--bdr);background:var(--bg-e);z-index:1}
-.pin{background:var(--coral);color:#fff;border:3px solid #fff;border-radius:20px;padding:3px 10px;font:800 13px 'Pretendard',sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35);transform:translate(-50%,-50%);display:inline-block;cursor:pointer}
+.pin{background:var(--coral);color:#fff;border:3px solid #fff;border-radius:20px;padding:3px 10px;font:800 13px 'Noto Sans KR',sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35);transform:translate(-50%,-50%);display:inline-block;cursor:pointer}
 .pin.r{background:var(--sx)}.pin.s{background:var(--grn)}.pin.sel{outline:3px solid var(--t1);transform:translate(-50%,-50%) scale(1.12)}
-.leaflet-container{font-family:'Pretendard',sans-serif}
+.leaflet-container{font-family:'Noto Sans KR',sans-serif}
 .gtip{font-weight:700}
 .guchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center;font-size:.8rem;color:var(--t2)}
-.ach{border:1px solid var(--bdr);background:var(--bg-s);border-radius:20px;padding:4px 12px;font:600 .8rem 'Pretendard',inherit;cursor:pointer;color:var(--t2)}
+.ach{border:1px solid var(--bdr);background:var(--bg-s);border-radius:20px;padding:4px 12px;font:600 .8rem 'Noto Sans KR',inherit;cursor:pointer;color:var(--t2)}
 .ach.sel{border-color:var(--coral);color:#fff;background:var(--coral)}
 /* tracks */
 .trow{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--td)}
@@ -114,7 +115,7 @@ svg{max-width:100%}
 .planw{position:relative}
 #fp{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rs)}
 .pe{cursor:pointer}.pe:hover .hl{stroke:var(--coral);stroke-width:2.5}.pe.on .hl{stroke:var(--coral);stroke-width:4}
-.pe text{pointer-events:none;font-family:'Pretendard',sans-serif}
+.pe text{pointer-events:none;font-family:'Noto Sans KR',sans-serif}
 .pop{position:absolute;z-index:20;width:300px;max-width:92%;background:var(--bg-s);border:1px solid var(--coral);border-radius:12px;box-shadow:0 10px 30px rgba(40,25,10,.28);padding:16px 16px 14px;display:none}
 .pop.show{display:block}.pop h3{font-size:1.05rem;font-weight:800}.pop .sub{font-size:.8rem;color:var(--t2);margin:2px 0 8px}
 .pop .x{position:absolute;right:8px;top:6px;border:none;background:none;font-size:1.2rem;color:var(--t3);cursor:pointer}
@@ -122,7 +123,7 @@ svg{max-width:100%}
 .tg{display:inline-block;font-size:.66rem;font-weight:700;border:1px solid var(--bdr);border-radius:20px;padding:0 7px;margin-right:6px;vertical-align:1px}
 .tg.ok{color:var(--grn)}.tg.wr{color:var(--gold)}.tg.co{color:var(--coral)}
 .pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.pc{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:4px 11px;font:600 .78rem 'Pretendard',inherit;cursor:pointer}.pc.on{background:var(--coral);border-color:var(--coral);color:#fff}
+.pc{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:4px 11px;font:600 .78rem 'Noto Sans KR',inherit;cursor:pointer}.pc.on{background:var(--coral);border-color:var(--coral);color:#fff}
 @media(max-width:640px){.wrap{padding:32px 16px 0}.hdr h1{font-size:1.4rem}.collage{justify-content:center}.pol{width:104px}.pop{position:static;width:100%;max-width:none;margin-top:10px}}
 
 /* ===== Pinterest-style skin ===== */
@@ -158,43 +159,29 @@ body{background:var(--bg)}
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in" id="nav">
-<a href="#mood">무드</a><a href="#motion">영상</a><a href="#s1">뜬다의 정의</a><a href="#s2">지표 정의</a><a href="#s3">분석 결과</a><a href="#s4">1위 논의</a><a href="#sc">매장 컨셉</a><a href="#s5">한계</a><a href="#s6">출처</a>
-<span class="sp"></span><button class="tbtn" id="tb">다크</button></div><div class="pt"><div class="pb" id="pb"></div></div></nav>
+<nav class="nav"><div class="nav-in" id="nav"><span class="logo">열</span><a href="#s1">정의</a><a href="#s2">지표</a><a href="#s3">후보</a><a href="#s4">왜 어린이대공원</a><a href="#sc">컨셉</a><a href="#motion">영상</a><a href="#mood">무드</a><a href="#s6">출처</a></div><div class="pt"><div class="pb" id="pb"></div></div></nav>
 
 <div class="wrap">
-<div class="hdr">
-  <h1>서울 스페셜티 카페, 다음 자리는 <span>어린이대공원</span></h1>
-  <p>서울 열린데이터광장 · 상권 766곳 비교 · 성수를 기준으로 지표 보정 · 기준일 2026-10-18</p>
-  <div class="chips"><span class="chip co">1순위 어린이대공원</span><span class="chip">2순위 문래</span><span class="chip">3순위 약수</span></div>
-  <div class="collage" aria-hidden="true">
-    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#D9C2A0"/><circle cx="70" cy="72" r="54" fill="#F3E9D8"/><circle cx="70" cy="72" r="54" fill="none" stroke="#C9AE86" stroke-width="2"/><circle cx="70" cy="70" r="36" fill="#FFFFFF"/><circle cx="70" cy="70" r="30" fill="url(#cg)"/><defs><radialGradient id="cg" cx="40%" cy="40%"><stop offset="0" stop-color="#C58A4E"/><stop offset="1" stop-color="#7A4A26"/></radialGradient></defs><path d="M52 66 q18 -12 36 0" fill="none" stroke="#E7C59A" stroke-width="3" stroke-linecap="round"/><path d="M96 68 q14 2 20 10" fill="none" stroke="#C9AE86" stroke-width="4" stroke-linecap="round"/><ellipse cx="118" cy="82" rx="7" ry="3.5" fill="#C9AE86"/></svg><small>espresso</small></div>
-    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#CDB89A"/><rect x="0" y="108" width="140" height="32" fill="#B08A5E"/><path d="M38 34 h64 l-12 34 h-40 z" fill="#F6EFE3" stroke="#9A7A55" stroke-width="2"/><path d="M48 40 h44 l-8 22 h-28 z" fill="#8A5A34"/><rect x="48" y="68" width="44" height="6" rx="3" fill="#E4D5BD"/><path d="M50 74 h40 v28 q0 6 -6 6 h-28 q-6 0 -6 -6 z" fill="#EFE3CF" fill-opacity=".85" stroke="#9A7A55" stroke-width="2"/><path d="M52 90 h36 v12 q0 4 -4 4 h-28 q-4 0 -4 -4 z" fill="#6B3F20"/></svg><small>pour over</small></div>
-    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#E6D3B4"/><rect x="14" y="14" width="112" height="112" rx="6" fill="#F7EEDC" stroke="#D5BE97" stroke-width="2"/><circle cx="70" cy="72" r="38" fill="#D79A55"/><circle cx="70" cy="72" r="38" fill="none" stroke="#B87A3A" stroke-width="3"/><path d="M70 72 m0 0 a6 6 0 1 1 6 6 a12 12 0 1 1 -12 -12 a18 18 0 1 1 18 18 a24 24 0 1 1 -24 -24" fill="none" stroke="#9B5F26" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="116" cy="112" rx="5" ry="2.6" fill="#7E9A5C" transform="rotate(-30 116 112)"/></svg><small>cardamom bun</small></div>
-  </div>
+<header class="hero">
+<div>
+<div class="eyebrow">열두해 커피 · SEOUL SPECIALTY COFFEE · 2026</div>
+<h1>향후 3년,<br>다음은 <em>어린이대공원</em>.</h1>
+<p>성수·연남처럼 이미 뜬 곳은 정답이 아닙니다. 서울시 상권 데이터 766곳으로 "뜬다"를 정의하고 후보를 선별했습니다. 1순위 어린이대공원에는 "어린이대공원 테이스팅 룸"을 제안합니다.</p>
+<div class="rk"><a href="#s3"><i>1</i>어린이대공원</a><a href="#s3"><i>2</i>문래</a><a href="#s3"><i>3</i>약수</a></div>
 </div>
+<div class="mosaic" aria-hidden="true">
+<div class="mt" style="grid-row:span 2;background:linear-gradient(165deg,#FFE9C8,#F2A95B)"><svg viewBox="0 0 120 190" style="width:100%;height:100%"><circle cx="60" cy="62" r="26" fill="#FFD58A"/><circle cx="60" cy="62" r="26" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3"/><rect x="0" y="130" width="120" height="60" fill="#C98B4D" fill-opacity=".45"/></svg><span class="lb">DAY</span></div>
+<div class="mt" style="background:#D6DDC9"><svg viewBox="0 0 120 92" style="width:100%;height:100%"><circle cx="60" cy="46" r="30" fill="#D79A55"/><path d="M60 46 m0 0 a5 5 0 1 1 5 5 a10 10 0 1 1 -10 -10 a15 15 0 1 1 15 15 a20 20 0 1 1 -20 -20" fill="none" stroke="#9B5F26" stroke-width="3" stroke-linecap="round"/></svg></div>
+<div class="mt" style="grid-row:span 2;background:linear-gradient(170deg,#3B2A1E,#120C08)"><svg viewBox="0 0 120 190" style="width:100%;height:100%"><circle cx="82" cy="52" r="20" fill="#FFF1CF"/><circle cx="90" cy="46" r="18" fill="#2A1D14"/><circle cx="60" cy="150" r="60" fill="#FFD58A" fill-opacity=".12"/></svg><span class="lb">NIGHT</span></div>
+<div class="mt" style="background:#2B2018"><svg viewBox="0 0 120 92" style="width:100%;height:100%"><circle cx="60" cy="46" r="34" fill="#17110C"/><circle cx="60" cy="46" r="26" fill="none" stroke="#3A2A1E" stroke-width="2"/><circle cx="60" cy="46" r="14" fill="#E60023"/><circle cx="60" cy="46" r="2.5" fill="#17110C"/></svg></div>
+<div class="mt" style="background:#E60023;display:flex;align-items:center;justify-content:center;color:#fff;font:900 1.7rem 'Noto Serif KR',serif">+26.2%</div>
+<div class="mt" style="grid-row:span 2;background:#F3D5CC;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;color:#4A2A22;font:900 1.35rem/1.25 'Noto Serif KR',serif">Tasting<br>Room</div>
+<div class="mt" style="background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#2A211B"><b style="font:900 1.5rem 'Noto Serif KR',serif;color:#E60023">61.2%</b><span style="font-size:.62rem;font-weight:700;color:#6F6258">20~30대 비중</span></div>
+<div class="mt" style="background:#EFE0C8"><svg viewBox="0 0 120 92" style="width:100%;height:100%"><circle cx="60" cy="46" r="32" fill="#F7EEDC" stroke="#C9AE86" stroke-width="3"/><circle cx="60" cy="46" r="21" fill="#6E411F"/><path d="M46 44 q14 -10 28 0" fill="none" stroke="#E7C59A" stroke-width="3" stroke-linecap="round"/></svg></div>
+</div>
+</header>
+<div class="marquee" aria-hidden="true"><div><span>동네 에스프레소 바<b>✦</b>예약제 커피 코스<b>✦</b>카다멈 번<b>✦</b>우드톤 · 따뜻한 조명<b>✦</b>굿즈 티셔츠<b>✦</b></span><span>동네 에스프레소 바<b>✦</b>예약제 커피 코스<b>✦</b>카다멈 번<b>✦</b>우드톤 · 따뜻한 조명<b>✦</b>굿즈 티셔츠<b>✦</b></span></div></div>
 
-
-<section class="sec" id="mood" style="margin-top:36px">
-<div class="lab">MOODBOARD</div><h2>어린이대공원 테이스팅 룸의 무드</h2>
-<p class="lead">컨셉을 시각화한 일러스트 무드보드입니다. 실제 매장 이미지가 아니며, 색과 분위기의 방향을 보여 줍니다.</p>
-<div class="mb">
-<div class="tile"><svg viewBox="0 0 300 380"><rect width="300" height="380" fill="#D9C2A0"/><circle cx="150" cy="190" r="118" fill="#F3E9D8"/><circle cx="150" cy="190" r="118" fill="none" stroke="#C9AE86" stroke-width="3"/><circle cx="150" cy="186" r="78" fill="#fff"/><radialGradient id="e1" cx="40%" cy="38%"><stop offset="0" stop-color="#C58A4E"/><stop offset="1" stop-color="#6E411F"/></radialGradient><circle cx="150" cy="186" r="66" fill="url(#e1)"/><path d="M108 178 q42 -28 84 0" fill="none" stroke="#E7C59A" stroke-width="6" stroke-linecap="round"/><path d="M230 190 q34 6 44 24" fill="none" stroke="#C9AE86" stroke-width="8" stroke-linecap="round"/></svg><span class="cap">낮 · 동네 에스프레소 바</span></div>
-<div class="tile txt" style="background:#B5651D"><b>낮에는 동네 에스프레소 바,<br>저녁에는 예약제 커피 코스</b><span>어린이대공원 테이스팅 룸</span></div>
-<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#E6D3B4"/><circle cx="150" cy="150" r="112" fill="#D79A55"/><circle cx="150" cy="150" r="112" fill="none" stroke="#B87A3A" stroke-width="6"/><path d="M150 150 m0 0 a14 14 0 1 1 14 14 a28 28 0 1 1 -28 -28 a42 42 0 1 1 42 42 a56 56 0 1 1 -56 -56 a70 70 0 1 1 70 70" fill="none" stroke="#9B5F26" stroke-width="9" stroke-linecap="round"/><circle cx="96" cy="96" r="5" fill="#F4E2BE"/><circle cx="208" cy="104" r="5" fill="#F4E2BE"/><circle cx="196" cy="214" r="5" fill="#F4E2BE"/><ellipse cx="258" cy="266" rx="14" ry="7" fill="#7E9A5C" transform="rotate(-30 258 266)"/></svg><span class="cap">카다멈 번 · 매일 완판</span></div>
-<div class="tile stat"><div class="n">61.2%</div><span>20~30대 유동 비중 · 서울 상권 766곳 중 상위 2% (어린이대공원역 3번 상권)</span></div>
-<div class="tile"><svg viewBox="0 0 300 420"><rect width="300" height="420" fill="#3A2A1E"/><radialGradient id="lg" cx="50%" cy="30%"><stop offset="0" stop-color="#FFD58A" stop-opacity=".95"/><stop offset="1" stop-color="#FFD58A" stop-opacity="0"/></radialGradient><circle cx="150" cy="110" r="150" fill="url(#lg)"/><path d="M110 90 q40 -50 80 0 z" fill="#E9C27A"/><rect x="146" y="90" width="8" height="150" fill="#6B4B33"/><rect x="0" y="300" width="300" height="120" fill="#A9794F"/><rect x="0" y="300" width="300" height="10" fill="#7B5636"/><circle cx="80" cy="330" r="30" fill="#B98B5E"/><circle cx="220" cy="345" r="26" fill="#B98B5E"/></svg><span class="cap">우드 테이블 · 따뜻한 조명</span></div>
-<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#2B2018"/><circle cx="150" cy="150" r="112" fill="#17110C"/><circle cx="150" cy="150" r="92" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="70" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="38" fill="#B5651D"/><circle cx="150" cy="150" r="5" fill="#17110C"/><rect x="214" y="40" width="64" height="10" rx="5" fill="#D79A5B" transform="rotate(30 246 45)"/></svg><span class="cap">플레이리스트 · Yusuf Dayes 무드</span></div>
-<div class="tile"><svg viewBox="0 0 300 340"><rect width="300" height="340" fill="#EFE2CC"/><path d="M80 120 h140 l14 190 h-168 z" fill="#F7EEDC" stroke="#C9AE86" stroke-width="3"/><path d="M110 120 q0 -60 40 -60 q40 0 40 60" fill="none" stroke="#B98B5E" stroke-width="8"/><circle cx="150" cy="212" r="38" fill="#B5651D"/><text x="150" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#fff" font-family="Malgun Gothic,sans-serif">TR</text><circle cx="248" cy="64" r="26" fill="#D79A5B"/><circle cx="52" cy="290" r="22" fill="#7E9A5C"/></svg><span class="cap">에코백 · 스티커 · 커스텀 원두</span></div>
-<div class="tile" style="background:#fff"><svg viewBox="0 0 300 150"><rect width="60" height="150" x="0" fill="#EFE5D6"/><rect width="60" height="150" x="60" fill="#B98B5E"/><rect width="60" height="150" x="120" fill="#7B5636"/><rect width="60" height="150" x="180" fill="#B5651D"/><rect width="60" height="150" x="240" fill="#FFD58A"/><text x="30" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">크림</text><text x="90" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">우드</text><text x="150" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">로스트</text><text x="210" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">카라멜</text><text x="270" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">조명</text></svg><span class="cap">컬러 팔레트</span></div>
-</div></section>
-<!-- 01 -->
-
-<section class="sec" id="motion" style="margin-top:36px">
-<div class="lab">MOTION</div><h2>왜 다음은 어린이대공원인가</h2>
-<p class="lead">서울 상권 766곳을 같은 5개 지표로 비교한 결과를 13초로 요약했습니다.</p>
-<div class="nr" style="padding:14px;border-radius:28px"><video src="motion.mp4" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:20px;display:block;background:#EFE5D6"></video></div>
-</section>
 <section class="sec" id="s1">
 <div class="lab">01 · DEFINITION</div><h2>"뜬다"의 정의</h2>
 <div class="method"><div><b>도구</b>서울 열린데이터광장 · 성수 사례</div><span class="ar">→</span><div><b>분석</b>성수가 뜰 때 무엇이 먼저 움직였는지 관찰</div><span class="ar">→</span><div><b>결론</b>숫자로 판정할 수 있는 한 줄 정의</div></div>
@@ -217,7 +204,7 @@ body{background:var(--bg)}
 <div class="nr gl"><h3>필터</h3><div class="one">후보에서 <b>걸러내는</b> 조건</div><div>점수를 더하는 지표가 아니라 쇠퇴 중인 상권을 제외하는 조건입니다.</div><div class="eg">상권변동지표가 정체·축소인 곳은 통과하지 못합니다.</div></div>
 </div>
 
-<div class="g5" style="margin-top:14px">
+<p class="note" style="margin:16px 0 8px">지표 카드를 누르면 방법론과 결론, 한계가 펼쳐집니다.</p><div class="g5" style="margin-top:4px">
 <div class="nr ic"><div class="top"><span class="no">①</span><h3>개인 카페 영업중 증가</h3><span class="chip co">선행</span></div>
 <div class="crit">3년간 순증 +25곳 이상, 증가율 +41% 이상</div>
 <dl><dt>방법</dt><dd>인허가 API로 역 반경 700m 안의 영업중 카페를 연말마다 세어, 3년 증가를 서울 4,595개 지점과 비교했습니다.</dd><dt>결론</dt><dd>성수는 뜨기 직전 3년(2017→2020) +31곳으로 서울 상위 6%였고, 그 수준을 기준으로 삼았습니다.</dd><dt>한계</dt><dd>한 번 오른 뒤 정체하는 오탐이 있어 ②와 함께 봅니다.</dd></dl></div>
@@ -275,6 +262,13 @@ body{background:var(--bg)}
 <section class="sec" id="s4">
 <div class="lab">04 · DISCUSSION</div><h2>1위 어린이대공원에 대한 논의</h2>
 <div class="method"><div><b>도구</b>인허가 API(영업중 카페 수) · 상권분석 API(매출·유동)</div><span class="ar">→</span><div><b>분석</b>어린이대공원을 성수(뜬 곳), 연남(포화), 연희(정착)와 같은 지표로 대조</div><span class="ar">→</span><div><b>결론</b>유동과 매출은 서울 상위권이고 개인 카페는 아직 적은 구간</div></div>
+<div class="stats">
+<div class="st"><div class="n"><span data-count="61.2" data-dec="1">61.2</span>%</div><div class="d">20~30대 유동 비중<small>서울 상권 766곳 중 상위 2%</small></div></div>
+<div class="st"><div class="n">+<span data-count="26.2" data-dec="1">26.2</span>%</div><div class="d">점포당 월매출 증가<small>2년 · 1,980만원</small></div></div>
+<div class="st"><div class="n">+<span data-count="14.2" data-dec="1">14.2</span>%</div><div class="d">객단가 증가<small>프리미엄 수용 여지</small></div></div>
+<div class="st"><div class="n">+<span data-count="20" data-dec="0">20</span>%</div><div class="d">개인 카페 증가<small>2년 · 현재 6곳</small></div></div>
+</div>
+<div class="nr card" style="margin-bottom:14px"><h3>어린이대공원 vs 기준 상권</h3><p style="font-size:.84rem;color:var(--t2);margin-bottom:10px">지표를 선택하면 막대가 바뀝니다. 모두 2024Q2→2026Q2 상권 단위 값입니다.</p><div class="tabs2" id="cmpTabs"></div><div id="cmpBars"></div></div>
 <div class="nr card"><h3>왜 어린이대공원인가</h3>
 <p style="font-size:.92rem">후보 3곳 중 <b>5개 지표를 모두 충족한 유일한 곳</b>입니다. 20~30대 유동 비중 61.2%는 서울 상권 중 상위 2%이고 2년 변화도 +2.1%p입니다. 개인 카페는 6곳으로 적지만 2년간 20% 늘었고, 점포당 월매출 +26.2%, 객단가 +14.2%로 매출도 함께 확인됩니다. 인허가로는 2017→2020년 영업중 카페가 51→95곳(+86%)으로 같은 기간 성수(+42%)보다 빠르게 늘었다가, 최근(2022→2025)에는 109→105곳(-4%)으로 정체했습니다. 서울 전체 스크리닝에서도 1위로 올라온 상권이라 "데이터가 먼저, 후보가 나중"이라는 순서에도 맞습니다.</p></div>
 <div class="nr card"><h3>기준 상권과 비교: 성수 · 연남 · 연희</h3>
@@ -293,7 +287,7 @@ body{background:var(--bg)}
 
 <!-- 05 -->
 <section class="sec" id="sc">
-<div class="lab">05 · CONCEPT</div><h2>매장 컨셉: 어린이대공원 테이스팅 룸</h2>
+<div class="lab">05 · CONCEPT</div><h2>매장 컨셉: 열두해 커피 · 어린이대공원 테이스팅 룸</h2>
 <div class="method"><div><b>도구</b>어린이대공원 상권 데이터 · 컨셉 기획</div><span class="ar">→</span><div><b>분석</b>상권에서 읽은 특징(20~30대 비중 높음, 개인 카페 소수, 매출 상승)을 컨셉 요소에 연결</div><span class="ar">→</span><div><b>결론</b>낮에는 동네 에스프레소 바, 저녁에는 예약제 커피 코스</div></div>
 <div class="nr card" style="border-color:var(--coral)"><div class="lab" style="margin-bottom:4px">ONE LINE</div>
 <p style="font-size:1.15rem;font-weight:800;letter-spacing:-.3px;line-height:1.5">커피 한 우물 12년 경력의 부부가 운영하는, 핀터레스트 무드의 소규모 커뮤니티형 스페셜티 카페</p>
@@ -339,6 +333,26 @@ body{background:var(--bg)}
 <li>코스 구성과 가격, 예약 방식, 영업 요일과 시간</li><li>디저트 3종의 구성과 일 한정 수량</li><li>굿즈 구성과 가격, 커스텀 원두 라인업</li><li>좌석 수와 바 구조, 어린이대공원 현장 경쟁 카페 가격 조사</li></ul></div>
 </section>
 
+<section class="sec" id="motion" style="margin-top:36px">
+<div class="lab">MOTION</div><h2>왜 다음은 어린이대공원인가</h2>
+<p class="lead">서울 상권 766곳을 같은 5개 지표로 비교한 결과를 13초로 요약했습니다.</p>
+<div class="nr" style="padding:14px;border-radius:28px"><video src="motion.mp4" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:20px;display:block;background:#EFE5D6"></video></div>
+</section>
+
+<section class="sec" id="mood" style="margin-top:36px">
+<div class="lab">MOODBOARD</div><h2>어린이대공원 테이스팅 룸의 무드 <span class="cnt" id="saveCnt"></span></h2>
+<p class="lead">컨셉을 시각화한 일러스트 무드보드입니다. 마음에 드는 핀을 저장해 보세요. 실제 매장 이미지가 아니며 색과 분위기의 방향을 보여 줍니다.</p>
+<div class="mb">
+<div class="tile"><svg viewBox="0 0 300 380"><rect width="300" height="380" fill="#D9C2A0"/><circle cx="150" cy="190" r="118" fill="#F3E9D8"/><circle cx="150" cy="190" r="118" fill="none" stroke="#C9AE86" stroke-width="3"/><circle cx="150" cy="186" r="78" fill="#fff"/><radialGradient id="e1" cx="40%" cy="38%"><stop offset="0" stop-color="#C58A4E"/><stop offset="1" stop-color="#6E411F"/></radialGradient><circle cx="150" cy="186" r="66" fill="url(#e1)"/><path d="M108 178 q42 -28 84 0" fill="none" stroke="#E7C59A" stroke-width="6" stroke-linecap="round"/><path d="M230 190 q34 6 44 24" fill="none" stroke="#C9AE86" stroke-width="8" stroke-linecap="round"/></svg><span class="cap">낮 · 동네 에스프레소 바</span></div>
+<div class="tile txt" style="background:#B5651D"><b>낮에는 동네 에스프레소 바,<br>저녁에는 예약제 커피 코스</b><span>어린이대공원 테이스팅 룸</span></div>
+<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#E6D3B4"/><circle cx="150" cy="150" r="112" fill="#D79A55"/><circle cx="150" cy="150" r="112" fill="none" stroke="#B87A3A" stroke-width="6"/><path d="M150 150 m0 0 a14 14 0 1 1 14 14 a28 28 0 1 1 -28 -28 a42 42 0 1 1 42 42 a56 56 0 1 1 -56 -56 a70 70 0 1 1 70 70" fill="none" stroke="#9B5F26" stroke-width="9" stroke-linecap="round"/><circle cx="96" cy="96" r="5" fill="#F4E2BE"/><circle cx="208" cy="104" r="5" fill="#F4E2BE"/><circle cx="196" cy="214" r="5" fill="#F4E2BE"/><ellipse cx="258" cy="266" rx="14" ry="7" fill="#7E9A5C" transform="rotate(-30 258 266)"/></svg><span class="cap">카다멈 번 · 매일 완판</span></div>
+<div class="tile stat"><div class="n">61.2%</div><span>20~30대 유동 비중 · 서울 상권 766곳 중 상위 2% (어린이대공원역 3번 상권)</span></div>
+<div class="tile"><svg viewBox="0 0 300 420"><rect width="300" height="420" fill="#3A2A1E"/><radialGradient id="lg" cx="50%" cy="30%"><stop offset="0" stop-color="#FFD58A" stop-opacity=".95"/><stop offset="1" stop-color="#FFD58A" stop-opacity="0"/></radialGradient><circle cx="150" cy="110" r="150" fill="url(#lg)"/><path d="M110 90 q40 -50 80 0 z" fill="#E9C27A"/><rect x="146" y="90" width="8" height="150" fill="#6B4B33"/><rect x="0" y="300" width="300" height="120" fill="#A9794F"/><rect x="0" y="300" width="300" height="10" fill="#7B5636"/><circle cx="80" cy="330" r="30" fill="#B98B5E"/><circle cx="220" cy="345" r="26" fill="#B98B5E"/></svg><span class="cap">우드 테이블 · 따뜻한 조명</span></div>
+<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#2B2018"/><circle cx="150" cy="150" r="112" fill="#17110C"/><circle cx="150" cy="150" r="92" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="70" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="38" fill="#B5651D"/><circle cx="150" cy="150" r="5" fill="#17110C"/><rect x="214" y="40" width="64" height="10" rx="5" fill="#D79A5B" transform="rotate(30 246 45)"/></svg><span class="cap">플레이리스트 · Yusuf Dayes 무드</span></div>
+<div class="tile"><svg viewBox="0 0 300 340"><rect width="300" height="340" fill="#EFE2CC"/><path d="M80 120 h140 l14 190 h-168 z" fill="#F7EEDC" stroke="#C9AE86" stroke-width="3"/><path d="M110 120 q0 -60 40 -60 q40 0 40 60" fill="none" stroke="#B98B5E" stroke-width="8"/><circle cx="150" cy="212" r="38" fill="#B5651D"/><text x="150" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#fff" font-family="Malgun Gothic,sans-serif">TR</text><circle cx="248" cy="64" r="26" fill="#D79A5B"/><circle cx="52" cy="290" r="22" fill="#7E9A5C"/></svg><span class="cap">에코백 · 스티커 · 커스텀 원두</span></div>
+<div class="tile" style="background:#fff"><svg viewBox="0 0 300 150"><rect width="60" height="150" x="0" fill="#EFE5D6"/><rect width="60" height="150" x="60" fill="#B98B5E"/><rect width="60" height="150" x="120" fill="#7B5636"/><rect width="60" height="150" x="180" fill="#B5651D"/><rect width="60" height="150" x="240" fill="#FFD58A"/><text x="30" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">크림</text><text x="90" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">우드</text><text x="150" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">로스트</text><text x="210" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">카라멜</text><text x="270" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">조명</text></svg><span class="cap">컬러 팔레트</span></div>
+</div></section>
+
 <section class="sec" id="s5">
 <div class="lab">06 · LIMITS</div><h2>한계와 후속 과제</h2>
 <div class="nr card"><ul>
@@ -353,7 +367,48 @@ body{background:var(--bg)}
 <section class="sec" id="s6">
 <div class="lab">07 · SOURCES</div><h2>출처</h2>
 <div class="nr card">
-<style>.refs{list-style:none;padding:0;counter-reset:r}.refs li{counter-increment:r;display:grid;grid-template-columns:34px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--td);font-size:.84rem;line-height:1.55}.refs li:last-child{border-bottom:none}.refs li::before{content:counter(r);font-weight:800;color:var(--coral)}.refs b{display:block;font-size:.86rem}.refs span{color:var(--t2)}.refs a{color:var(--coral);text-decoration:none;word-break:break-all}.refs a:hover{text-decoration:underline}</style>
+<style>.refs{list-style:none;padding:0;counter-reset:r}.refs li{counter-increment:r;display:grid;grid-template-columns:34px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--td);font-size:.84rem;line-height:1.55}.refs li:last-child{border-bottom:none}.refs li::before{content:counter(r);font-weight:800;color:var(--coral)}.refs b{display:block;font-size:.86rem}.refs span{color:var(--t2)}.refs a{color:var(--coral);text-decoration:none;word-break:break-all}.refs a:hover{text-decoration:underline}
+/* ===== reference-style skin ===== */
+:root{--bg:#F7F2EC;--bg-s:#FFFFFF;--bg-e:#EFE7DC;--t1:#2A211B;--t2:#6F6258;--t3:#A39689;--coral:#E60023;--coral-a:rgba(230,0,35,.07);--bdr:rgba(42,33,27,.10);--bdr-h:rgba(42,33,27,.25);--td:rgba(42,33,27,.07)}
+body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;background:var(--bg)}
+.sec h2,.hero h1,.st .n{font-family:'Noto Serif KR',serif;font-weight:900}
+.sec h2{font-size:2.1rem;letter-spacing:-1px}
+.lab{color:var(--coral)}
+.nav .logo{width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;display:inline-flex;align-items:center;justify-content:center;font:900 15px 'Noto Serif KR',serif;margin-right:6px;flex:none}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center;margin:8px 0 28px}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;color:var(--t2);margin-bottom:16px}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.4rem);line-height:1.12;letter-spacing:-2px}.hero h1 em{font-style:normal;color:var(--coral)}
+.hero p{margin-top:20px;font-size:.98rem;color:var(--t2);max-width:31em;line-height:1.8}
+.rk{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.rk a{display:inline-flex;align-items:center;gap:10px;background:#fff;border-radius:999px;padding:6px 20px 6px 6px;text-decoration:none;color:var(--t1);font-weight:700;font-size:.92rem;box-shadow:0 2px 10px rgba(42,33,27,.08);transition:transform .2s,box-shadow .2s}
+.rk a:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(42,33,27,.14)}
+.rk i{font-style:normal;width:30px;height:30px;border-radius:50%;background:#EFE7DC;display:flex;align-items:center;justify-content:center;font-size:.82rem}.rk a:first-child i{background:var(--coral);color:#fff}
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:94px;gap:12px}
+.mt{border-radius:22px;overflow:hidden;position:relative;transition:transform .3s,box-shadow .3s;box-shadow:0 6px 18px rgba(42,33,27,.10)}
+.mt:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 18px 32px rgba(42,33,27,.2)}
+.mt .lb{position:absolute;left:12px;bottom:10px;font-size:.64rem;font-weight:800;letter-spacing:.1em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.marquee{overflow:hidden;white-space:nowrap;padding:18px 0;border-block:1px solid var(--bdr);margin-bottom:6px}
+.marquee>div{display:inline-block;animation:mq 30s linear infinite}.marquee span{display:inline-block;font:700 1.3rem 'Noto Serif KR',serif;color:var(--t2)}.marquee b{color:var(--coral);margin:0 26px}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.marquee>div{animation:none}}
+.nav a.on{background:var(--coral);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.st{background:#fff;border-radius:26px;padding:24px 22px;box-shadow:0 1px 3px rgba(42,33,27,.06),0 12px 28px rgba(42,33,27,.08);transition:transform .25s}.st:hover{transform:translateY(-5px)}
+.st .n{font-size:2.9rem;line-height:1;color:var(--coral);letter-spacing:-2px}.st .d{margin-top:10px;font-weight:700;font-size:.9rem}.st small{display:block;font-weight:500;color:var(--t2);font-size:.76rem;margin-top:3px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}}
+.tabs2{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.tabs2 button{border:none;background:#EFE7DC;color:var(--t2);border-radius:999px;padding:8px 16px;font:700 .8rem 'Noto Sans KR',sans-serif;cursor:pointer;transition:all .2s}.tabs2 button.on{background:var(--coral);color:#fff}
+.cb{display:grid;grid-template-columns:110px 1fr 74px;gap:12px;align-items:center;margin:9px 0;font-size:.86rem}
+.cb .nm{font-weight:700;text-align:right}.cb .tr{height:20px;background:rgba(42,33,27,.07);border-radius:999px;overflow:hidden}.cb .fl{height:100%;width:0;border-radius:999px;background:#B8AA9A;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.cb.hl .fl{background:var(--coral)}.cb.hl .nm,.cb.hl .vl{color:var(--coral)}.cb .vl{font-weight:800;font-variant-numeric:tabular-nums}
+.ic{cursor:pointer}.ic dl{display:none}.ic.open dl{display:grid}
+.ic::after{content:'+ 방법론 보기';display:block;margin-top:10px;font-size:.76rem;font-weight:800;color:var(--coral)}.ic.open::after{content:'− 접기'}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+.rf{opacity:0;transition:opacity .8s ease}.rf.in{opacity:1}
+.save{position:absolute;right:12px;top:12px;border:none;border-radius:999px;padding:8px 15px;background:var(--coral);color:#fff;font:800 .76rem 'Noto Sans KR',sans-serif;opacity:0;transition:opacity .2s,transform .2s;cursor:pointer}
+.tile:hover .save,.save.on{opacity:1}.save.on{background:#2A211B}.save:active{transform:scale(.94)}
+.cnt{font:700 .9rem 'Noto Sans KR',sans-serif;color:var(--coral);margin-left:8px}
+@media(max-width:600px){.cb{grid-template-columns:84px 1fr 62px}}
+</style>
 <h3 style="margin-bottom:2px">데이터</h3>
 <ol class="refs">
 <li><div><b>서울시 상권분석서비스 · 추정매출-상권 (VwsmTrdarSelngQq)</b><span>서울신용보증재단 제공 · 서울 열린데이터광장 Open API · 커피-음료 업종(CS100010) · 기준 2021Q1~2026Q2 · 조회 2026-10-18 · 점포당 월매출·객단가 산출에 사용</span><br><a href="https://data.seoul.go.kr" target="_blank" rel="noopener">data.seoul.go.kr</a></div></li>
@@ -367,7 +422,7 @@ body{background:var(--bg)}
 <ol class="refs">
 <li><div><b>서울 행정구역(구) 경계</b><span>통계청 2013 행정구역 기반 GeoJSON · southkorea/seoul-maps</span><br><a href="https://github.com/southkorea/seoul-maps" target="_blank" rel="noopener">github.com/southkorea/seoul-maps</a></div></li>
 <li><div><b>지도 타일</b><span>© OpenStreetMap contributors, © CARTO</span><br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">openstreetmap.org/copyright</a> · <a href="https://carto.com/attributions" target="_blank" rel="noopener">carto.com/attributions</a></div></li>
-<li><div><b>지도 라이브러리 및 서체</b><span>Leaflet 1.9.4 · Pretendard</span><br><a href="https://leafletjs.com" target="_blank" rel="noopener">leafletjs.com</a> · <a href="https://github.com/orioncactus/pretendard" target="_blank" rel="noopener">github.com/orioncactus/pretendard</a></div></li>
+<li><div><b>지도 라이브러리 및 서체</b><span>Leaflet 1.9.4 · Noto Sans KR · Noto Serif KR (Google Fonts)</span><br><a href="https://leafletjs.com" target="_blank" rel="noopener">leafletjs.com</a> · <a href="https://fonts.google.com" target="_blank" rel="noopener">fonts.google.com</a></div></li>
 </ol>
 <h3 style="margin:18px 0 2px">산출 방법 요약</h3>
 <ul style="margin-top:6px"><li>20~30대 비중·점포당 월매출·객단가·개인 카페 증가율은 위 API 값으로 2024Q2→2026Q2(2년)를 비교했고, 서울 상권 766곳(2024Q2·2026Q2 모두 카페 5곳 이상)의 분포에서 순위를 산출했습니다.</li><li>점포당 월매출 = 커피-음료 월 추정매출 ÷ 점포 수, 객단가 = 월 추정매출 ÷ 결제건수입니다. 매출은 추정값입니다.</li><li>인허가 기준 영업중 카페 수는 역 중심 반경 700m 안의 점포를 연말 기준으로 집계했습니다(좌표계 EPSG:5174).</li></ul>
@@ -508,11 +563,38 @@ document.querySelectorAll('#fp .pe').forEach(g=>g.addEventListener('click',ev=>{
 document.getElementById('fp').addEventListener('click',()=>{psel=null;document.getElementById('pop').classList.remove('show');drawPlan()});
 /* ---------- 공통 ---------- */
 const root=document.documentElement;
-document.getElementById('tb').onclick=function(){const d=root.dataset.theme==='dark';root.dataset.theme=d?'light':'dark';this.textContent=d?'다크':'라이트';drawChart();drawTracks();drawMapSel()};
+
 const secs=[...document.querySelectorAll('.sec')],links=[...document.querySelectorAll('#nav a')];
 function onS(){const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);document.getElementById('pb').style.width=(p*100)+'%';
- let cur=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<120)cur=i});links.forEach((a,i)=>a.classList.toggle('on',i===cur))}
+ let cur=-1,best=-1e9;links.forEach((a,i)=>{const t=document.querySelector(a.getAttribute('href'));if(!t)return;const y=t.getBoundingClientRect().top;if(y<140&&y>best){best=y;cur=i}});links.forEach((a,i)=>a.classList.toggle('on',i===cur))}
 addEventListener('scroll',onS,{passive:true});onS();
 initMap();pick('어린이대공원');drawChart();drawPlan();
+</script>
+
+<script>
+/* 스크롤 등장, 카운트업, 아코디언, 비교 막대, 핀 저장 */
+(function(){
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+   e.target.querySelectorAll('[data-count]').forEach(cu)}}),{threshold:.12});
+ document.querySelectorAll('.sec .tile,.sec .ic,.sec .gl,.sec .kc,.sec .st,.mt').forEach(e=>{e.classList.add('rv');io.observe(e)});
+ document.querySelectorAll('.sec > .nr.card,.sec > .method').forEach(e=>{if(!e.querySelector('#map'))e.classList.add('rf');io.observe(e)});
+ function cu(el){const to=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||0),t0=performance.now();
+  (function f(t){const k=Math.min(1,(t-t0)/1100),v=to*(1-Math.pow(1-k,3));el.textContent=v.toFixed(dec);if(k<1)requestAnimationFrame(f)})(t0)}
+ document.querySelectorAll('.ic').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('open')));
+ /* 비교 막대 */
+ const M=[{k:'young',lab:'20~30대 유동 비중'},{k:'rg',lab:'점포당 월매출 증가'},{k:'tg',lab:'객단가 증가'},{k:'ig',lab:'개인 카페 증가'}];
+ let ci=0;const tabs=document.getElementById('cmpTabs'),bars=document.getElementById('cmpBars');
+ function drawCmp(){
+  tabs.innerHTML='';M.forEach((m,i)=>{const b=document.createElement('button');b.textContent=m.lab;b.className=i==ci?'on':'';b.onclick=()=>{ci=i;drawCmp()};tabs.appendChild(b)});
+  const k=M[ci].k,rows=ORDER.map(n=>({n,v:AR[n][k]})).sort((a,b)=>b.v-a.v);
+  const lo=Math.min(0,...rows.map(r=>r.v)),hi=Math.max(...rows.map(r=>r.v));
+  bars.innerHTML=rows.map(r=>'<div class="cb'+(r.n=='어린이대공원'?' hl':'')+'"><span class="nm">'+r.n+'</span><div class="tr"><div class="fl" data-w="'+((r.v-lo)/(hi-lo||1)*100).toFixed(1)+'"></div></div><span class="vl">'+(k=='young'?'':(r.v>0?'+':''))+r.v.toFixed(1)+'%</span></div>').join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>bars.querySelectorAll('.fl').forEach(f=>f.style.width=f.dataset.w+'%')))}
+ drawCmp();
+ /* 핀 저장 */
+ const cntEl=document.getElementById('saveCnt');let n=0;
+ document.querySelectorAll('.mb .tile').forEach(t=>{const b=document.createElement('button');b.className='save';b.textContent='저장';
+  b.onclick=()=>{const on=b.classList.toggle('on');b.textContent=on?'저장됨':'저장';n+=on?1:-1;cntEl.textContent=n?('저장한 핀 '+n+'개'):''};t.appendChild(b)});
+})();
 </script>
 </body></html>
