@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>어린이대공원 스페셜티 카페 제안</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+:root{--bg:#EFE5D6;--bg-s:#FAF5EC;--bg-e:#E6D9C5;--bdr:rgba(70,45,25,.14);--bdr-h:rgba(70,45,25,.30);--t1:#3A2A1E;--t2:#7A6552;--t3:#A8967F;
+--coral:#B5651D;--coral-a:rgba(181,101,29,.10);--sx:#5B7083;--yn:#A8967F;--yh:#6B8E5A;--grn:#5E8B4F;--dn:#B5483A;--gold:#A67C1A;
+--okbg:rgba(94,139,79,.16);--wrbg:rgba(166,124,26,.16);--nobg:rgba(181,72,58,.13);
+--r:14px;--rs:8px;--nav-bg:rgba(239,229,214,.92);--shadow:0 1px 3px rgba(70,45,25,.08),0 6px 18px rgba(70,45,25,.08);--td:rgba(70,45,25,.08);--prog:rgba(70,45,25,.10)}
+[data-theme="dark"]{--bg:#1A130D;--bg-s:#241B13;--bg-e:#2D2218;--bdr:rgba(255,255,255,.09);--bdr-h:rgba(255,255,255,.22);--t1:#F0E8DC;--t2:#B3A38F;--t3:#7E6F5E;
+--coral:#D79A5B;--coral-a:rgba(215,154,91,.14);--sx:#6C9BF0;--yn:#8D877B;--yh:#22C55E;--grn:#4FC79A;--dn:#EF7A6C;--gold:#E0B04A;
+--okbg:rgba(79,199,154,.16);--wrbg:rgba(224,176,74,.16);--nobg:rgba(239,122,108,.14);
+--nav-bg:rgba(26,19,13,.92);--shadow:none;--td:rgba(255,255,255,.05);--prog:rgba(255,255,255,.06)}
+html{scroll-behavior:smooth}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body,.nr,.chip,.nav,td,th{transition:background-color .22s ease,border-color .22s ease,color .18s ease,box-shadow .22s ease}
+body{background:var(--bg);color:var(--t1);font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic','Apple SD Gothic Neo',sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:80px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:48px 24px 0}
+.nr{background:var(--bg-s);border:1px solid var(--bdr);border-radius:var(--r);box-shadow:var(--shadow)}
+.xbox{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rs);padding:12px}
+.xbox h4{font-size:.8rem;color:var(--t3);font-weight:700;margin-bottom:6px}
+/* nav */
+.nav{position:sticky;top:0;z-index:2000;background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr);overflow:hidden}
+.nav-in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;overflow-x:auto;height:50px}
+.nav a{font-size:.84rem;font-weight:600;color:var(--t2);text-decoration:none;padding:6px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover{color:var(--t1)}.nav a.on{color:var(--coral)}.nav .sp{flex:1}
+.tbtn{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:5px 12px;font:600 .78rem 'Pretendard',inherit;cursor:pointer}
+.pt{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--prog)}.pb{height:100%;width:0;background:var(--coral);transition:width .1s linear}
+/* hero */
+.hdr{margin-bottom:28px;position:relative;padding:30px 28px 26px;border-radius:var(--r);border:1px solid var(--bdr);overflow:hidden;background:repeating-linear-gradient(90deg,rgba(120,80,40,.05) 0 2px,transparent 2px 52px),linear-gradient(180deg,#F4EAD8,#E9DBC4);box-shadow:var(--shadow)}
+[data-theme="dark"] .hdr{background:repeating-linear-gradient(90deg,rgba(255,220,170,.04) 0 2px,transparent 2px 52px),linear-gradient(180deg,#2B2015,#21180F)}
+.hdr h1{font-size:1.76rem;font-weight:800;letter-spacing:-.5px;line-height:1.35}.hdr h1 span{color:var(--coral)}
+.hdr p{margin-top:8px;font-size:.87rem;color:var(--t2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:20px;font-size:.78rem;font-weight:600;border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);white-space:nowrap}
+.chip.ok{color:var(--grn)}.chip.no{color:var(--dn)}.chip.wr{color:var(--gold)}.chip.co{color:var(--coral)}
+.collage{position:relative;display:flex;justify-content:flex-end;align-items:flex-start;margin-top:22px;min-height:190px;padding-right:8px}
+.pol{position:relative;background:#FFFBF2;padding:8px 8px 24px;box-shadow:0 2px 4px rgba(60,35,15,.18),0 10px 22px rgba(60,35,15,.16);width:148px;margin-left:-16px;transition:transform .2s}
+.pol:hover{transform:rotate(0deg) scale(1.05)!important;z-index:5}
+.pol::before{content:"";position:absolute;top:-9px;left:50%;width:56px;height:18px;margin-left:-28px;background:rgba(200,160,100,.45);transform:rotate(-4deg)}
+.pol svg{display:block;width:100%;height:auto}
+.pol small{position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:.7rem;letter-spacing:.08em;color:#8A6B4E;font-weight:600}
+.pol:nth-child(1){transform:rotate(-6deg);margin-top:6px}.pol:nth-child(2){transform:rotate(4deg);margin-top:-6px;z-index:2}.pol:nth-child(3){transform:rotate(-3deg);margin-top:16px}
+/* sections */
+.sec{margin-top:60px;scroll-margin-top:70px}
+.lab{font-size:.78rem;font-weight:800;color:var(--coral);letter-spacing:.06em;margin-bottom:6px}
+.sec h2{font-size:1.4rem;font-weight:800;letter-spacing:-.3px;margin-bottom:8px}
+.method{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:stretch;margin:0 0 18px;font-size:.84rem}
+.method div{background:var(--bg-s);border:1px solid var(--bdr);border-radius:10px;padding:8px 12px;flex:1 1 220px}
+.method b{display:block;font-size:.7rem;letter-spacing:.06em;color:var(--coral);margin-bottom:2px}
+.method .ar{flex:0 0 auto;align-self:center;color:var(--t3);background:none;border:none;padding:0}
+.lead{font-size:.9rem;color:var(--t2);margin-bottom:16px}
+.card{padding:22px}.card+.card{margin-top:14px}.card h3{font-size:1rem;font-weight:800;margin-bottom:8px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.g5{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+ul{padding-left:18px}li{margin:4px 0;font-size:.9rem}
+.note{font-size:.78rem;color:var(--t3);margin-top:10px;line-height:1.6}
+.kc{padding:22px 22px 18px}.kc .t{font-size:.78rem;font-weight:700;color:var(--t3)}.kc .n{font-size:1.9rem;font-weight:800;margin:2px 0}.kc .d{font-size:.84rem;color:var(--t2)}
+.kc.first{border-color:var(--coral);background:linear-gradient(0deg,var(--coral-a),var(--coral-a)),var(--bg-s)}
+/* glossary */
+.gl{padding:16px 18px}.gl h3{font-size:1rem;font-weight:800;margin-bottom:2px}.gl .one{font-size:.84rem;color:var(--t2);margin-bottom:6px}.gl .eg{font-size:.8rem;color:var(--t2);border-top:1px dashed var(--bdr);padding-top:6px;margin-top:6px}
+/* indicator cards */
+.ic{padding:18px}.ic .top{display:flex;align-items:center;gap:8px;margin-bottom:6px}.ic .no{font-size:1.1rem;font-weight:800;color:var(--coral)}
+.ic h3{margin:0;font-size:1rem}.ic .crit{font-size:1.02rem;font-weight:800;margin:6px 0 8px;padding:8px 10px;background:var(--coral-a);border-radius:8px}
+.ic dl{display:grid;grid-template-columns:44px 1fr;gap:4px 8px;font-size:.82rem;line-height:1.5}.ic dt{color:var(--t3);font-weight:700}.ic dd{color:var(--t1)}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:10px 0 14px;font-size:.8rem}
+.tl>div{padding:10px 12px;border:1px solid var(--bdr);background:var(--bg)}.tl>div:first-child{border-radius:10px 0 0 10px}.tl>div:last-child{border-radius:0 10px 10px 0}
+.tl .mid{background:var(--coral);color:#fff;text-align:center;border-color:var(--coral)}.tl b{display:block;margin-bottom:2px}
+@media(max-width:640px){.tl{grid-template-columns:1fr}.tl>div,.tl>div:first-child,.tl>div:last-child{border-radius:8px;margin-bottom:6px}}
+/* map */
+#map{height:440px;border-radius:var(--rs);border:1px solid var(--bdr);background:var(--bg-e);z-index:1}
+.pin{background:var(--coral);color:#fff;border:3px solid #fff;border-radius:20px;padding:3px 10px;font:800 13px 'Pretendard',sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35);transform:translate(-50%,-50%);display:inline-block;cursor:pointer}
+.pin.r{background:var(--sx)}.pin.s{background:var(--grn)}.pin.sel{outline:3px solid var(--t1);transform:translate(-50%,-50%) scale(1.12)}
+.leaflet-container{font-family:'Pretendard',sans-serif}
+.gtip{font-weight:700}
+.guchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center;font-size:.8rem;color:var(--t2)}
+.ach{border:1px solid var(--bdr);background:var(--bg-s);border-radius:20px;padding:4px 12px;font:600 .8rem 'Pretendard',inherit;cursor:pointer;color:var(--t2)}
+.ach.sel{border-color:var(--coral);color:#fff;background:var(--coral)}
+/* tracks */
+.trow{display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--td)}
+.trow:last-child{border-bottom:none}
+.trow .lb b{font-size:.88rem;display:block}.trow .lb span{font-size:.74rem;color:var(--t3);line-height:1.3;display:block}
+.trk{position:relative;height:56px}
+.trk .bar{position:absolute;left:0;right:0;top:24px;height:10px;border-radius:5px;background:var(--bdr)}
+.trk .zone{position:absolute;top:24px;height:10px;background:var(--okbg);border:1px solid var(--grn);border-radius:5px}
+.trk .tl2{position:absolute;top:16px;bottom:10px;width:0;border-left:2px dashed var(--t1)}
+.trk .tlab{position:absolute;top:-2px;font-size:.68rem;color:var(--t2);transform:translateX(-50%);white-space:nowrap}
+.trk .mk{position:absolute;top:21px;width:16px;height:16px;border-radius:50%;margin-left:-8px;border:2px solid var(--bg-s);cursor:pointer}
+.trk .ml{position:absolute;font-size:.68rem;font-weight:700;transform:translateX(-50%);white-space:nowrap;pointer-events:none}
+.trk .ends{position:absolute;left:0;right:0;bottom:-4px;display:flex;justify-content:space-between;font-size:.64rem;color:var(--t3)}
+@media(max-width:700px){.trow{grid-template-columns:1fr}}
+/* scorecard */
+.sc{overflow-x:auto}table.score{width:100%;border-collapse:separate;border-spacing:3px;font-size:.82rem;font-variant-numeric:tabular-nums;min-width:720px}
+.score th{font-weight:700;color:var(--t2);padding:6px 6px;font-size:.78rem;text-align:center;cursor:pointer;border-radius:6px}
+.score th.rl,.score td.rl{text-align:left;cursor:default;min-width:150px}
+.score td{padding:7px 6px;text-align:center;border-radius:6px;line-height:1.25}
+.score td.rl{background:none;font-weight:700;font-size:.8rem}.score td.rl small{display:block;color:var(--t3);font-weight:500;font-size:.68rem}
+.score td .v{font-weight:800;font-size:.95rem;display:block}.score td .s{font-size:.68rem;color:var(--t2);display:block}
+.score td.ok{background:var(--okbg)}.score td.wr{background:var(--wrbg)}.score td.no{background:var(--nobg)}.score td.na{background:var(--bg)}
+.score th.cs,.score td.cs{box-shadow:inset 0 0 0 2px var(--coral)}
+.score tr.sum td{font-weight:800;background:var(--bg-e)}
+.leg{display:flex;gap:10px;flex-wrap:wrap;font-size:.74rem;color:var(--t2);margin-top:8px}.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-2px}
+/* tables generic */
+table.t{width:100%;border-collapse:collapse;font-size:.86rem;font-variant-numeric:tabular-nums}
+.t th{font-weight:600;color:var(--t3);padding:9px 12px;text-align:left;font-size:.78rem;border-bottom:1px solid var(--bdr);white-space:nowrap}
+.t td{padding:10px 12px;border-bottom:1px solid var(--td);vertical-align:top}.t tr:last-child td{border-bottom:none}.t td.r,.t th.r{text-align:right}.t tr.hl td{background:var(--coral-a)}
+.ok{color:var(--grn);font-weight:700}.wr{color:var(--gold);font-weight:700}.no{color:var(--dn);font-weight:700}
+svg{max-width:100%}
+/* plan */
+.planw{position:relative}
+#fp{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rs)}
+.pe{cursor:pointer}.pe:hover .hl{stroke:var(--coral);stroke-width:2.5}.pe.on .hl{stroke:var(--coral);stroke-width:4}
+.pe text{pointer-events:none;font-family:'Pretendard',sans-serif}
+.pop{position:absolute;z-index:20;width:300px;max-width:92%;background:var(--bg-s);border:1px solid var(--coral);border-radius:12px;box-shadow:0 10px 30px rgba(40,25,10,.28);padding:16px 16px 14px;display:none}
+.pop.show{display:block}.pop h3{font-size:1.05rem;font-weight:800}.pop .sub{font-size:.8rem;color:var(--t2);margin:2px 0 8px}
+.pop .x{position:absolute;right:8px;top:6px;border:none;background:none;font-size:1.2rem;color:var(--t3);cursor:pointer}
+.pop ul{padding:0}.pop li{list-style:none;margin:7px 0;font-size:.84rem;line-height:1.5}
+.tg{display:inline-block;font-size:.66rem;font-weight:700;border:1px solid var(--bdr);border-radius:20px;padding:0 7px;margin-right:6px;vertical-align:1px}
+.tg.ok{color:var(--grn)}.tg.wr{color:var(--gold)}.tg.co{color:var(--coral)}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pc{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:4px 11px;font:600 .78rem 'Pretendard',inherit;cursor:pointer}.pc.on{background:var(--coral);border-color:var(--coral);color:#fff}
+@media(max-width:640px){.wrap{padding:32px 16px 0}.hdr h1{font-size:1.4rem}.collage{justify-content:center}.pol{width:104px}.pop{position:static;width:100%;max-width:none;margin-top:10px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in" id="nav">
+<a href="#s1">뜬다의 정의</a><a href="#s2">지표 정의</a><a href="#s3">분석 결과</a><a href="#s4">1위 논의</a><a href="#sc">매장 컨셉</a><a href="#s5">한계</a>
+<span class="sp"></span><button class="tbtn" id="tb">다크</button></div><div class="pt"><div class="pb" id="pb"></div></div></nav>
+
+<div class="wrap">
+<div class="hdr">
+  <h1>서울 스페셜티 카페, 다음 자리는 <span>어린이대공원</span></h1>
+  <p>서울 열린데이터광장 · 상권 766곳 비교 · 성수를 기준으로 지표 보정 · 기준일 2026-10-18</p>
+  <div class="chips"><span class="chip co">1순위 어린이대공원</span><span class="chip">2순위 문래</span><span class="chip">3순위 약수</span></div>
+  <div class="collage" aria-hidden="true">
+    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#D9C2A0"/><circle cx="70" cy="72" r="54" fill="#F3E9D8"/><circle cx="70" cy="72" r="54" fill="none" stroke="#C9AE86" stroke-width="2"/><circle cx="70" cy="70" r="36" fill="#FFFFFF"/><circle cx="70" cy="70" r="30" fill="url(#cg)"/><defs><radialGradient id="cg" cx="40%" cy="40%"><stop offset="0" stop-color="#C58A4E"/><stop offset="1" stop-color="#7A4A26"/></radialGradient></defs><path d="M52 66 q18 -12 36 0" fill="none" stroke="#E7C59A" stroke-width="3" stroke-linecap="round"/><path d="M96 68 q14 2 20 10" fill="none" stroke="#C9AE86" stroke-width="4" stroke-linecap="round"/><ellipse cx="118" cy="82" rx="7" ry="3.5" fill="#C9AE86"/></svg><small>espresso</small></div>
+    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#CDB89A"/><rect x="0" y="108" width="140" height="32" fill="#B08A5E"/><path d="M38 34 h64 l-12 34 h-40 z" fill="#F6EFE3" stroke="#9A7A55" stroke-width="2"/><path d="M48 40 h44 l-8 22 h-28 z" fill="#8A5A34"/><rect x="48" y="68" width="44" height="6" rx="3" fill="#E4D5BD"/><path d="M50 74 h40 v28 q0 6 -6 6 h-28 q-6 0 -6 -6 z" fill="#EFE3CF" fill-opacity=".85" stroke="#9A7A55" stroke-width="2"/><path d="M52 90 h36 v12 q0 4 -4 4 h-28 q-4 0 -4 -4 z" fill="#6B3F20"/></svg><small>pour over</small></div>
+    <div class="pol"><svg viewBox="0 0 140 140"><rect width="140" height="140" fill="#E6D3B4"/><rect x="14" y="14" width="112" height="112" rx="6" fill="#F7EEDC" stroke="#D5BE97" stroke-width="2"/><circle cx="70" cy="72" r="38" fill="#D79A55"/><circle cx="70" cy="72" r="38" fill="none" stroke="#B87A3A" stroke-width="3"/><path d="M70 72 m0 0 a6 6 0 1 1 6 6 a12 12 0 1 1 -12 -12 a18 18 0 1 1 18 18 a24 24 0 1 1 -24 -24" fill="none" stroke="#9B5F26" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="116" cy="112" rx="5" ry="2.6" fill="#7E9A5C" transform="rotate(-30 116 112)"/></svg><small>cardamom bun</small></div>
+  </div>
+</div>
+
+<!-- 01 -->
+<section class="sec" id="s1">
+<div class="lab">01 · DEFINITION</div><h2>"뜬다"의 정의</h2>
+<div class="method"><div><b>도구</b>서울 열린데이터광장 · 성수 사례</div><span class="ar">→</span><div><b>분석</b>성수가 뜰 때 무엇이 먼저 움직였는지 관찰</div><span class="ar">→</span><div><b>결론</b>숫자로 판정할 수 있는 한 줄 정의</div></div>
+<div class="nr card"><h3>한 줄 정의</h3>
+<p style="font-size:1.02rem">개인 카페가 서울 상위권 속도로 늘고, 20~30대 유동 비중이 높고 오르며, 아직 성수·홍대만큼 포화되지 않았고, 서울시 상권변동지표가 다이나믹·확장인 상권.</p>
+<ul style="margin-top:12px">
+<li>먼저 움직이는 신호(선행)가 켜지고, 뒤이어 매출 같은 확인 신호가 따라오는 곳을 "뜨는 곳"으로 봅니다.</li>
+<li>성수·홍대·연남은 이미 뜬 곳이라 비교 기준점으로만 씁니다.</li>
+<li>성수가 뜬 시점은 2021년으로 가정했습니다(팀 합의).</li></ul></div>
+</section>
+
+<!-- 02 -->
+<section class="sec" id="s2">
+<div class="lab">02 · INDICATORS</div><h2>지표 정의와 기준</h2>
+<div class="method"><div><b>도구</b>서울시 상권분석서비스 API(상권 766곳)와 휴게음식점 인허가 API</div><span class="ar">→</span><div><b>분석</b>성수가 뜨기 전과 뜨는 동안 어떤 숫자가 먼저, 어떤 숫자가 나중에 움직였는지 비교</div><span class="ar">→</span><div><b>결론</b>지표 5개와 통과 기준 (선행 2, 확인 2, 필터 1)</div></div>
+
+<div class="g3">
+<div class="nr gl"><h3>선행 지표</h3><div class="one">사람들이 몰리기 <b>전에</b> 먼저 움직이는 신호</div><div>독립 카페가 먼저 들어오고, 20~30대가 먼저 늘어납니다. 뜨는 곳을 일찍 찾는 용도입니다.</div><div class="eg">성수는 매출이 오르기 전에 ①②가 먼저 켜졌습니다.</div></div>
+<div class="nr gl"><h3>확인 지표</h3><div class="one">이미 일어난 일을 숫자로 <b>확인</b>하는 신호</div><div>매출과 객단가는 뜬 뒤에 오릅니다. 후보가 실제 소비로 이어지는지 확인하는 용도입니다.</div><div class="eg">성수의 점포당 매출은 뜨는 동안 서울 중간이었고 한참 뒤에 올랐습니다.</div></div>
+<div class="nr gl"><h3>필터</h3><div class="one">후보에서 <b>걸러내는</b> 조건</div><div>점수를 더하는 지표가 아니라 쇠퇴 중인 상권을 제외하는 조건입니다.</div><div class="eg">상권변동지표가 정체·축소인 곳은 통과하지 못합니다.</div></div>
+</div>
+
+<div class="g5" style="margin-top:14px">
+<div class="nr ic"><div class="top"><span class="no">①</span><h3>개인 카페 영업중 증가</h3><span class="chip co">선행</span></div>
+<div class="crit">3년간 순증 +25곳 이상, 증가율 +41% 이상</div>
+<dl><dt>방법</dt><dd>인허가 API로 역 반경 700m 안의 영업중 카페를 연말마다 세어, 3년 증가를 서울 4,595개 지점과 비교했습니다.</dd><dt>결론</dt><dd>성수는 뜨기 직전 3년(2017→2020) +31곳으로 서울 상위 6%였고, 그 수준을 기준으로 삼았습니다.</dd><dt>한계</dt><dd>한 번 오른 뒤 정체하는 오탐이 있어 ②와 함께 봅니다.</dd></dl></div>
+<div class="nr ic"><div class="top"><span class="no">②</span><h3>20~30대 유동 비중</h3><span class="chip co">선행</span></div>
+<div class="crit">비중 44.5% 이상, 2년 변화 +1.5%p 이상</div>
+<dl><dt>방법</dt><dd>길단위 유동인구 API로 상권 766곳의 20~30대 비중과 2년 변화를 계산해 성수 도약기와 비교했습니다.</dd><dt>결론</dt><dd>성수는 서울 상위 6~13%여서, 서울 상위 25% 선(44.5%, +1.5%p)을 기준으로 삼았습니다.</dd><dt>한계</dt><dd>대학가는 학생 때문에 높게 나옵니다.</dd></dl></div>
+<div class="nr ic"><div class="top"><span class="no">③</span><h3>점포당 월매출</h3><span class="chip">확인</span></div>
+<div class="crit">2년 +24% 이상이면 확인, -10% 이하는 탈락</div>
+<dl><dt>방법</dt><dd>추정매출 API의 커피-음료 매출을 점포 수로 나눠 2년 증가율을 계산했습니다.</dd><dt>결론</dt><dd>성수는 도약기에 서울 중간 수준이라 선행이 아닌 확인용으로 두었고, +24%는 서울 상위 약 25% 선입니다.</dd><dt>한계</dt><dd>서울신용보증재단의 추정값입니다.</dd></dl></div>
+<div class="nr ic"><div class="top"><span class="no">④</span><h3>객단가</h3><span class="chip">확인</span></div>
+<div class="crit">2년 +13% 이상</div>
+<dl><dt>방법</dt><dd>추정매출을 결제건수로 나눠 2년 증가율을 계산했습니다.</dd><dt>결론</dt><dd>성수 도약기에는 서울 중간 수준이라 확인용입니다. +13%는 서울 상위 약 25% 선이며 가격 책정 근거로 씁니다.</dd><dt>한계</dt><dd>선행 신호가 아닙니다.</dd></dl></div>
+<div class="nr ic"><div class="top"><span class="no">⑤</span><h3>상권변동지표</h3><span class="chip">필터</span></div>
+<div class="crit">다이나믹·상권확장만 통과</div>
+<dl><dt>방법</dt><dd>상권변동지표 API가 주는 서울시 공식 등급을 그대로 썼습니다.</dd><dt>결론</dt><dd>성수 상권은 모두 다이나믹·확장이어서 이 두 등급을 통과 기준으로 삼았습니다.</dd><dt>한계</dt><dd>등급 산식은 공개 요약만 확인했습니다.</dd></dl></div>
+</div>
+
+<div class="nr card" style="margin-top:14px"><h3>서울 열린데이터로 성수에 적용해 검증해 봤습니다</h3>
+<p style="font-size:.9rem;color:var(--t2)">성수가 2021년에 뜬 것으로 보고, 그 직전과 직후에 위 지표가 신호를 냈는지 확인했습니다.</p>
+<div class="tl"><div><b>뜨기 전 · 2017→2020</b>인허가 데이터 사용<br>영업중 카페 74곳에서 105곳으로 증가 (+31곳, 서울 상위 6%)</div><div class="mid"><b>2021</b>성수가 뜬 시점 (팀 가정)</div><div><b>뜨는 중 · 2021Q1→2023Q1</b>상권분석 데이터 사용<br>20~30대 비중이 서울 상위 6~13%, 점포당 매출은 서울 중간</div></div>
+<ul>
+<li><b>왜 기간이 다른가:</b> 인허가 데이터는 2001년부터 있어 뜨기 전을 볼 수 있습니다. 카드매출과 유동인구는 상권분석 API가 2021년 1분기부터만 제공해서, 뜬 이후 구간만 볼 수 있습니다.</li>
+<li><b>결과:</b> ①은 뜨기 전에 감지했고, ②는 뜨는 동안 높게 나왔습니다. ③④는 앞서 움직이지 않아 확인용으로 내렸습니다.</li></ul>
+<p class="note">한계: 성수가 처음 뜨던 시기 전체는 재현하지 못했고, 이 기준은 성수에 맞춘 보정이어서 예측 성능을 검증한 것은 아닙니다.</p></div>
+</section>
+
+<!-- 03 -->
+<section class="sec" id="s3">
+<div class="lab">03 · RESULT</div><h2>지표로 본 순위: 어린이대공원 → 문래 → 약수</h2>
+<div class="method"><div><b>도구</b>지표 5개 · 서울 766개 상권 분포 · 지도</div><span class="ar">→</span><div><b>분석</b>후보 3곳과 기준 상권(성수·연희·연남)을 같은 기준으로 서울 전체 줄 세우기에 올림</div><span class="ar">→</span><div><b>결론</b>어린이대공원이 5개 지표를 모두 충족해 1위</div></div>
+<div class="nr card"><h3>후보 3곳은 어떻게 나왔나</h3>
+<p style="font-size:.9rem"><b>약수와 문래는 팀 가설에서, 어린이대공원은 서울 전체 스크리닝에서 나왔습니다.</b> 약수·문래는 아직 조금은 underground지만 감각 있는 20대 크리에이터들이 "나만 아는 곳", "요즘 뜨는 곳"이라며 은근히 알리는 동네를 소비자 체감으로 고른 곳입니다. 어린이대공원은 서울 766개 상권을 위 지표로 거른 결과(상권변동지표 통과, 20~30대 비중·변화 상위권, 개인 카페 순증, 아직 매출이 높지 않은 곳) 1위로 올라온 "어린이대공원역 3번" 골목상권입니다. 가설 후보 2곳과 스크리닝 1위를 같은 점수판에서 비교합니다.</p></div>
+<div class="g3" style="margin-top:14px">
+<div class="nr kc first"><div class="t">1위</div><div class="n">어린이대공원</div><div class="d">5개 지표 모두 충족 (①②③④⑤)</div></div>
+<div class="nr kc"><div class="t">2위</div><div class="n">문래</div><div class="d">충족 2 (①⑤)</div></div>
+<div class="nr kc"><div class="t">3위</div><div class="n">약수</div><div class="d">일부 1 (②), 충족 0</div></div></div>
+
+<div class="nr card" style="margin-top:14px"><h3>지도에서 보기</h3>
+<p style="font-size:.84rem;color:var(--t2);margin-bottom:10px">구에 마우스를 올리면 그 구의 상권이, 구나 이름표를 클릭하면 아래 지표가 해당 상권으로 바뀝니다.</p>
+<div id="map"></div>
+<div class="guchips" id="guchips"></div>
+<div class="note"><span style="color:var(--coral)">●</span> 후보(약수·문래는 팀 가설, 어린이대공원은 스크리닝 1위) &nbsp;<span style="color:var(--sx)">●</span> 기준 상권 &nbsp;· 지도: CARTO·OpenStreetMap, 구 경계: 통계청 2013 행정구역(southkorea/seoul-maps). 약수역은 중구·성동구 경계 일대로 중구에 표시했습니다.</div></div>
+
+<div class="nr card"><h3 id="trk-h">서울 상권 766곳을 줄 세웠을 때 위치</h3>
+<p style="font-size:.84rem;color:var(--t2);margin-bottom:6px">왼쪽이 하위, 오른쪽이 상위입니다. 초록 구간이 기준 통과 범위이고, 점은 각 상권의 위치입니다.</p>
+<div id="tracks"></div></div>
+
+<div class="nr card"><h3>지표별 점수판</h3>
+<div class="sc"><table class="score" id="score"></table></div>
+<div class="leg"><span><i style="background:var(--okbg)"></i>충족</span><span><i style="background:var(--wrbg)"></i>일부 충족</span><span><i style="background:var(--nobg)"></i>미충족</span><span>열 제목을 클릭하면 선택됩니다. 점수는 충족 1점, 일부 0.5점입니다.</span></div>
+<div class="note">① 상권 단위 개인 카페 2년 증가율 +10% 이상(인허가 기준 3년 변화는 작은 글씨) · ② 비중 44.5% 이상과 변화 +1.5%p 이상을 모두 충족하면 충족, 하나만이면 일부 · ③ +24% 이상 · ④ +13% 이상 · ⑤ 다이나믹·확장. 연희는 "서연중학교" 상권(서대문구 연희동 추정, 위치 미확인), 어린이대공원은 "어린이대공원역 3번" 골목상권입니다. 점포당 월매출은 서울신용보증재단 추정값입니다.</div></div>
+</section>
+
+<!-- 04 -->
+<section class="sec" id="s4">
+<div class="lab">04 · DISCUSSION</div><h2>1위 어린이대공원에 대한 논의</h2>
+<div class="method"><div><b>도구</b>인허가 API(영업중 카페 수) · 상권분석 API(매출·유동)</div><span class="ar">→</span><div><b>분석</b>어린이대공원을 성수(뜬 곳), 연남(포화), 연희(정착)와 같은 지표로 대조</div><span class="ar">→</span><div><b>결론</b>유동과 매출은 서울 상위권이고 개인 카페는 아직 적은 구간</div></div>
+<div class="nr card"><h3>왜 어린이대공원인가</h3>
+<p style="font-size:.92rem">후보 3곳 중 <b>5개 지표를 모두 충족한 유일한 곳</b>입니다. 20~30대 유동 비중 61.2%는 서울 상권 중 상위 2%이고 2년 변화도 +2.1%p입니다. 개인 카페는 6곳으로 적지만 2년간 20% 늘었고, 점포당 월매출 +26.2%, 객단가 +14.2%로 매출도 함께 확인됩니다. 인허가로는 2017→2020년 영업중 카페가 51→95곳(+86%)으로 같은 기간 성수(+42%)보다 빠르게 늘었다가, 최근(2022→2025)에는 109→105곳(-4%)으로 정체했습니다. 서울 전체 스크리닝에서도 1위로 올라온 상권이라 "데이터가 먼저, 후보가 나중"이라는 순서에도 맞습니다.</p></div>
+<div class="nr card"><h3>기준 상권과 비교: 성수 · 연남 · 연희</h3>
+<div class="sc"><table class="t">
+<tr><th>상권 (유형)</th><th class="r">영업중 카페<br>2017→2020</th><th class="r">영업중 카페<br>2022→2025</th><th class="r">20~30대 비중</th><th class="r">점포당 월매출</th><th>변동지표</th></tr>
+<tr><td>성수 (뜬 곳)</td><td class="r">74→105 (+42%)</td><td class="r">97→104 (+7%)</td><td class="r">54.4%</td><td class="r">3,490만 (+33.8%)</td><td>다이나믹</td></tr>
+<tr><td>연남 (포화)</td><td class="r">156→156 (0%)</td><td class="r">204→182 (-11%)</td><td class="r">50.7% (-2.1%p)</td><td class="r">4,030만 (+4.7%)</td><td>다이나믹</td></tr>
+<tr><td>연희 (정착)</td><td class="r">67→81 (+21%)</td><td class="r">101→103 (+2%)</td><td class="r">45.2% (+2.8%p)*</td><td class="r">3,240만 (+7%)*</td><td>다이나믹*</td></tr>
+<tr class="hl"><td><b>어린이대공원 (제안)</b></td><td class="r"><b>51→95 (+86%)</b></td><td class="r">109→105 (-4%)</td><td class="r"><b>61.2% (+2.1%p)</b></td><td class="r"><b>1,980만 (+26.2%)</b></td><td><b>상권확장</b></td></tr></table></div>
+<svg id="ch" viewBox="0 0 640 250" role="img" aria-label="영업중 카페 수 추이 (2017년=100)" style="margin-top:14px;width:100%"></svg>
+<p class="note">영업중 카페 수 추이(2017년=100). 어린이대공원은 2017→2020년에 지수 186으로 네 곳 중 가장 빨랐고 2022년 이후 소폭 줄었습니다. 연희는 2014·2017·2020·2022·2025년만 집계했습니다. * 연희 상권 값은 "서연중학교" 상권 기준(위치 미확인). 인허가는 역 중심 반경 700m 안의 커피숍·카페명 휴게음식점 영업중 점포(연말 기준)이며, 어린이대공원역 반경은 인근 군자역 일대와 일부 겹칩니다. 20~30대 비중·매출은 "어린이대공원역 3번" 골목상권 값입니다.</p></div>
+<div class="nr card"><h3>리스크 한 가지와 조기 경보</h3>
+<p style="font-size:.92rem"><b>상권 규모가 작아 수치가 한두 점포에 크게 흔들릴 수 있습니다.</b> "어린이대공원역 3번" 상권의 개인 카페는 6곳뿐이라 증가율과 점포당 매출이 쉽게 출렁입니다. 높은 20~30대 비중이 인근 대학 학생 유동에 기댄 것인지도 공개 통계만으로는 확인되지 않습니다.</p>
+<div class="chips"><span class="chip no" style="white-space:normal">철회 신호: 점포당 월매출 증가율이 두 분기 연속 둔화하거나, 개인 카페 순증이 마이너스로 돌아서면 철회</span></div></div>
+</section>
+
+<!-- 05 -->
+<section class="sec" id="sc">
+<div class="lab">05 · CONCEPT</div><h2>매장 컨셉: 어린이대공원 테이스팅 룸</h2>
+<div class="method"><div><b>도구</b>어린이대공원 상권 데이터 · 팀 컨셉 기획</div><span class="ar">→</span><div><b>분석</b>상권에서 읽은 특징(20~30대 비중 높음, 개인 카페 소수, 매출 상승)을 컨셉 요소에 연결</div><span class="ar">→</span><div><b>결론</b>낮에는 동네 에스프레소 바, 저녁에는 예약제 커피 코스</div></div>
+<div class="nr card" style="border-color:var(--coral)"><div class="lab" style="margin-bottom:4px">ONE LINE</div>
+<p style="font-size:1.15rem;font-weight:800;letter-spacing:-.3px;line-height:1.5">커피만 12년 판 느좋부부 사장이 운영하는 핀터레스트 감성 소규모 커뮤니티형 카페</p>
+<div class="chips"><span class="chip wr" style="white-space:normal">"12년"은 스토리 설정입니다. 실제 운영자의 경력과 다르면 홍보 문구로 쓰지 않습니다</span></div></div>
+
+<div class="nr card" style="margin-top:14px"><h3>매장 도식: 요소를 클릭해 보세요</h3>
+<div class="planw" id="planw">
+<svg id="fp" viewBox="0 0 600 410" role="img" aria-label="매장 내부 도식">
+<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFD58A" stop-opacity=".85"/><stop offset="1" stop-color="#FFD58A" stop-opacity="0"/></radialGradient>
+<pattern id="pl" width="56" height="28" patternUnits="userSpaceOnUse"><path d="M0 27.5H56M28 0V27" stroke="rgba(120,80,40,.12)" stroke-width="1"/></pattern></defs>
+<rect x="30" y="30" width="540" height="350" rx="6" fill="var(--bg-e)"/><rect x="30" y="30" width="540" height="350" rx="6" fill="url(#pl)"/>
+<rect x="34" y="34" width="400" height="52" fill="rgba(120,80,40,.10)"/><text x="46" y="82" font-size="9.5" fill="var(--t3)">바 안쪽 (스태프 존)</text>
+<g class="pe" data-k="tasting"><rect class="hl" x="440" y="34" width="126" height="224" fill="rgba(120,80,40,.14)" stroke="var(--t2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="480" y="108" width="46" height="112" rx="23" fill="#A9794F"/><circle cx="470" cy="128" r="7" fill="#7B5636"/><circle cx="470" cy="200" r="7" fill="#7B5636"/><circle cx="536" cy="128" r="7" fill="#7B5636"/><circle cx="536" cy="200" r="7" fill="#7B5636"/><circle cx="503" cy="98" r="7" fill="#7B5636"/><circle cx="503" cy="230" r="7" fill="#7B5636"/>
+<circle cx="503" cy="164" r="38" fill="url(#glow)"/><text x="503" y="52" text-anchor="middle" font-size="12" font-weight="800" fill="var(--t1)">테이스팅 룸</text><text x="503" y="68" text-anchor="middle" font-size="9.5" fill="var(--t2)">저녁 예약제</text></g>
+<line x1="440" y1="170" x2="440" y2="214" stroke="var(--coral)" stroke-width="3" stroke-dasharray="3 3"/><text x="436" y="196" text-anchor="end" font-size="9" fill="var(--coral)">커튼</text>
+<g class="pe" data-k="music"><rect class="hl" x="44" y="44" width="78" height="34" rx="4" fill="#5A4636"/><circle cx="68" cy="61" r="12" fill="#2B2018"/><circle cx="68" cy="61" r="3" fill="#D79A5B"/><rect x="92" y="52" width="24" height="5" rx="2" fill="#D79A5B"/><text x="83" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="var(--t1)">음악</text></g>
+<g class="pe" data-k="bar"><rect class="hl" x="170" y="84" width="250" height="28" rx="4" fill="#B98B5E"/><rect x="186" y="58" width="62" height="24" rx="3" fill="#4A3A2E"/><circle cx="262" cy="70" r="9" fill="#4A3A2E"/><text x="216" y="104" font-size="11" font-weight="800" fill="#FFF8EA">에스프레소 바</text></g>
+<g class="pe" data-k="pastry"><rect class="hl" x="340" y="84" width="76" height="28" rx="3" fill="rgba(255,255,255,.65)" stroke="#B98B5E" stroke-width="1.5"/><circle cx="356" cy="98" r="6" fill="#D79A55"/><circle cx="378" cy="98" r="6" fill="#C98A47"/><circle cx="400" cy="98" r="6" fill="#B87A3A"/><text x="378" y="125" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--t1)">디저트 케이스</text></g>
+<g class="pe" data-k="boss"><circle class="hl" cx="225" cy="50" r="15" fill="var(--coral)"/><text x="225" y="54" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">사장</text></g>
+<g class="pe" data-k="staff"><circle class="hl" cx="302" cy="50" r="15" fill="var(--sx)"/><text x="302" y="54" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">직원</text></g>
+<g class="pe" data-k="partner"><circle class="hl" cx="384" cy="50" r="15" fill="var(--grn)"/><text x="384" y="54" text-anchor="middle" font-size="9" font-weight="800" fill="#fff">공동</text></g>
+<g class="pe" data-k="goods"><rect class="hl" x="34" y="140" width="22" height="150" fill="#A9794F"/><rect x="38" y="150" width="14" height="14" fill="#F1E3C8"/><rect x="38" y="172" width="14" height="14" fill="#D79A5B"/><rect x="38" y="194" width="14" height="14" fill="#F1E3C8"/><rect x="38" y="216" width="14" height="14" fill="#D79A5B"/><rect x="38" y="238" width="14" height="14" fill="#F1E3C8"/><text x="68" y="217" font-size="11" font-weight="800" fill="var(--t1)">굿즈</text><text x="68" y="231" font-size="9" fill="var(--t2)">선반</text></g>
+<g class="pe" data-k="table"><circle cx="210" cy="215" r="44" fill="url(#glow)"/><circle cx="330" cy="255" r="44" fill="url(#glow)"/><circle cx="210" cy="325" r="44" fill="url(#glow)"/><circle cx="410" cy="320" r="40" fill="url(#glow)"/>
+<circle class="hl" cx="210" cy="215" r="20" fill="#B98B5E"/><circle class="hl" cx="330" cy="255" r="20" fill="#B98B5E"/><circle class="hl" cx="210" cy="325" r="20" fill="#B98B5E"/><circle class="hl" cx="410" cy="320" r="18" fill="#B98B5E"/>
+<circle cx="184" cy="215" r="6" fill="#7B5636"/><circle cx="236" cy="215" r="6" fill="#7B5636"/><circle cx="304" cy="255" r="6" fill="#7B5636"/><circle cx="356" cy="255" r="6" fill="#7B5636"/><circle cx="184" cy="325" r="6" fill="#7B5636"/><circle cx="236" cy="325" r="6" fill="#7B5636"/><circle cx="386" cy="320" r="6" fill="#7B5636"/><circle cx="434" cy="320" r="6" fill="#7B5636"/>
+<text x="270" y="372" text-anchor="middle" font-size="11" font-weight="800" fill="var(--t1)">우드 테이블 · 따뜻한 조명</text></g>
+<rect x="72" y="376" width="64" height="8" fill="var(--bg)"/><text x="104" y="402" text-anchor="middle" font-size="10" fill="var(--t3)">▲ 입구</text>
+</svg>
+<div class="pop" id="pop"></div></div>
+<div class="note">개념 도식입니다. 치수와 배치는 가정이며 실측이 아닙니다.</div>
+<div class="pchips" id="pchips"></div></div>
+
+<div class="nr card"><h3>컨셉이 상권 데이터와 맞는 부분 / 아직 모르는 부분</h3>
+<div class="sc"><table class="t">
+<tr><th>컨셉 요소</th><th>맞닿는 근거</th><th>검증이 필요한 것</th></tr>
+<tr><td>동네 에스프레소 바 (낮)</td><td>점포당 월매출 +26.2%, 개인 카페 소수(6곳)로 경쟁이 약한 구간 <span class="tg ok">데이터</span></td><td>평일 낮 유동과 학생·직장인 비중</td></tr>
+<tr><td>예약제 커피 코스 (저녁)</td><td>객단가 +14.2%로 프리미엄 수용 여지 <span class="tg ok">데이터</span></td><td>저녁 시간대 매출 비중, 코스 가격과 회전율</td></tr>
+<tr><td>소량 한정 디저트</td><td>20~30대 유동 비중 61.2%로 새로움에 반응하는 층이 두터움 <span class="tg ok">데이터</span></td><td>일 판매 수량, 원가, 솔드아웃이 재방문으로 이어지는지</td></tr>
+<tr><td>핀터레스트 감성, 굿즈, 플레이리스트</td><td>"요즘 뜨는 곳"을 알리는 확산 구조. 유튜브 영상 규모가 작아(중앙 조회수 220) 아직 덜 알려진 곳 <span class="tg ok">데이터</span></td><td>인스타 해시태그·계정 언급 수준과 증가 속도 <span class="tg wr">미측정</span></td></tr>
+<tr><td>소규모 커뮤니티형</td><td>상권변동지표 상권확장 <span class="tg ok">데이터</span></td><td>좌석 수, 임대료, 손익분기 <span class="tg wr">미확인</span></td></tr></table></div></div>
+<div class="nr card"><h3>이어서 정할 것</h3><ul>
+<li>코스 구성과 가격, 예약 방식, 영업 요일과 시간</li><li>디저트 3종의 구성과 일 한정 수량</li><li>굿즈 구성과 가격, 커스텀 원두 라인업</li><li>좌석 수와 바 구조, 어린이대공원 현장 경쟁 카페 가격 조사</li></ul></div>
+</section>
+
+<section class="sec" id="s5">
+<div class="lab">06 · LIMITS</div><h2>확인하지 못한 것</h2>
+<div class="nr card"><ul>
+<li>인스타그램 해시태그·카페 계정 언급은 측정하지 못했습니다(페이지 오류).</li>
+<li>유튜브는 날짜 정렬이 적용되지 않아 업로드 증가율을 계산하지 못했고, 영상 규모만 참고했습니다.</li>
+<li>임대료·권리금은 확인하지 못했습니다(한국부동산원 자료 확인 필요).</li>
+<li>어린이대공원은 "어린이대공원역 3번" 골목상권 1곳(개인 카페 6곳)만 집계해 표본이 작고, 인근 역(군자역 등) 상권은 포함하지 않았습니다.</li>
+<li>점포당 매출은 추정값이고 개인 카페가 6곳으로 적어 증감률 오차가 큽니다. 높은 20~30대 비중이 학생 유동 때문인지는 확인하지 못했습니다.</li></ul>
+<p class="note" style="margin-top:14px"><b>출처</b> 서울 열린데이터광장: 서울시 상권분석서비스 추정매출-상권(VwsmTrdarSelngQq), 점포-상권(VwsmTrdarStorQq), 길단위인구-상권(VwsmTrdarFlpopQq), 상권변동지표-상권(VwsmTrdarIxQq), 휴게음식점 인허가(LOCALDATA_072405) · 제공기관 서울신용보증재단·서울시 · 기준 2026Q2(상권), 2025년 말(인허가) · 조회일 2026-10-18 · 유튜브 검색 약 80편 · 지도 OpenStreetMap, 구 경계 통계청 2013 행정구역(southkorea/seoul-maps)</p></div>
+</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ---------- 데이터 ---------- */
+const AR={
+ '문래':{gu:'영등포구',cat:'c',tag:'문래예술촌',code:'3110759',lat:37.5176,lon:126.8960,young:34.3,yd:0.2,ig:15.4,rps:18.1,rg:-12.3,tg:4.1,ix:'상권확장',n:60,pct:{young:49,yd:62,ig:77,rps:47,rg:35,tg:51},p1:'88→99 (+12%)',p2:'110→111 (+1%)',yt:355,ser:[71,76,81,88,88,93,99,103,110,113,116,111]},
+ '약수':{gu:'중구',cat:'c',tag:'약수역',code:'3120038',lat:37.5544,lon:127.0100,young:34.7,yd:1.5,ig:0.0,rps:10.2,rg:-52.7,tg:-11.2,ix:'정체',n:13,pct:{young:51,yd:87,ig:67,rps:29,rg:8,tg:18},p1:'52→65 (+25%)',p2:'67→65 (-3%)',yt:670,ser:[34,42,50,52,60,64,65,66,67,71,66,65]},
+ '성수':{gu:'성동구',cat:'r',tag:'성수동카페거리',code:'3110131',lat:37.5446,lon:127.0563,young:54.4,yd:2.0,ig:-2.8,rps:34.9,rg:33.8,tg:8.8,ix:'다이나믹',n:35,pct:{young:94,yd:91,ig:50,rps:67,rg:81,tg:66},p1:'74→105 (+42%)',p2:'97→104 (+7%)',yt:29377,ser:[52,49,57,74,86,92,105,104,97,103,102,104]},
+ '연희':{gu:'서대문구',cat:'r',tag:'서연중학교(위치 미확인)',code:'3110508',lat:37.5665,lon:126.9330,young:45.2,yd:2.8,ig:3.7,rps:32.4,rg:7.3,tg:25.9,ix:'다이나믹',n:28,pct:{young:84,yd:97,ig:68,rps:65,rg:59,tg:87},p1:'67→81 (+21%)',p2:'101→103 (+2%)',yt:502,ser:[46,null,null,67,null,null,81,null,101,null,null,103]},
+ '연남':{gu:'마포구',cat:'r',tag:'연남동',code:'3120104',lat:37.5622,lon:126.9253,young:50.7,yd:-2.1,ig:-22.0,rps:40.3,rg:4.7,tg:6.2,ix:'다이나믹',n:156,pct:{young:92,yd:10,ig:26,rps:71,rg:55,tg:58},p1:'156→156 (0%)',p2:'204→182 (-11%)',yt:1120,ser:[98,108,129,156,170,166,156,195,204,192,191,182]},
+ '어린이대공원':{gu:'광진구',cat:'c',tag:'어린이대공원역 3번',code:'3110148',lat:37.5480,lon:127.0746,young:61.2,yd:2.1,ig:20.0,rps:19.8,rg:26.2,tg:14.2,ix:'상권확장',n:6,pct:{young:98,yd:93,ig:81,rps:50,rg:76,tg:75},p1:'51→95 (+86%)',p2:'109→105 (-4%)',yt:220,ser:[40,45,52,51,59,79,95,102,109,112,109,105]}};
+const ORDER=['어린이대공원','문래','약수','성수','연희','연남'];
+const IND=[
+ {no:'①',k:'ig',lab:'개인 카페 증가',sub:'상권 2년 증가율 ≥ +10%',unit:'%',tp:72.6,hi:true},
+ {no:'②',k:'young',lab:'20~30대 비중',sub:'≥ 44.5% 그리고 변화 ≥ +1.5%p',unit:'%',tp:82.4,hi:true},
+ {no:'③',k:'rg',lab:'점포당 월매출 증가',sub:'2년 ≥ +24% (확인)',unit:'%',tp:73.6,hi:true},
+ {no:'④',k:'tg',lab:'객단가 증가',sub:'2년 ≥ +13% (확인)',unit:'%',tp:73.5,hi:true}];
+let sel='어린이대공원';
+const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const catCol=c=>c=='c'?cv('--coral'):c=='r'?cv('--sx'):cv('--grn');
+const f1=v=>(v>0?'+':v<0?'-':'')+Math.abs(v).toFixed(1);
+function state(nm,k){const a=AR[nm];
+ if(k=='ig')return a.ig>=10?'ok':'no';
+ if(k=='young'){const l=a.young>=44.5,c=a.yd>=1.5;return l&&c?'ok':(l||c)?'wr':'no'}
+ if(k=='rg')return a.rg>=24?'ok':'no';
+ if(k=='tg')return a.tg>=13?'ok':'no';
+ if(k=='ix')return(a.ix=='다이나믹'||a.ix=='상권확장')?'ok':'no'}
+function score(nm){let ok=0,wr=0;['ig','young','rg','tg','ix'].forEach(k=>{const s=state(nm,k);if(s=='ok')ok++;else if(s=='wr')wr++});return{ok,wr}}
+/* ---------- 지도 ---------- */
+let map,guLayer,pins={},byGu={};
+Object.keys(AR).forEach(n=>{(byGu[AR[n].gu]=byGu[AR[n].gu]||[]).push(n)});
+function initMap(){
+ const box=document.getElementById('map');
+ if(typeof L==='undefined'){box.innerHTML='<div style="padding:30px;color:var(--t3)">지도 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요. 아래 칩으로 상권을 선택할 수 있습니다.</div>';return}
+ map=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([37.545,126.99],11);
+ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'&copy; OpenStreetMap contributors &copy; CARTO'}).addTo(map);
+ fetch('https://raw.githubusercontent.com/southkorea/seoul-maps/master/kostat/2013/json/seoul_municipalities_geo_simple.json').then(r=>r.json()).then(g=>{
+  guLayer=L.geoJSON(g,{style:f=>{const a=byGu[f.properties.name];return a?{color:cv('--coral'),weight:1.5,fillColor:catCol(AR[a[0]].cat),fillOpacity:.22}:{color:'#8a7a68',weight:1,fillOpacity:0}},
+   onEachFeature:(f,l)=>{const nm=f.properties.name,a=byGu[nm];
+    l.bindTooltip(a?'<span class="gtip">'+nm+'</span><br>'+a.join(' · '):'<span class="gtip">'+nm+'</span>',{sticky:true});
+    l.on('mouseover',()=>l.setStyle({weight:3,fillOpacity:a?.45:.12,fillColor:a?catCol(AR[a[0]].cat):'#b59a78'}));
+    l.on('mouseout',()=>guLayer.resetStyle(l));
+    l.on('click',()=>{if(a)pick(a.includes(sel)?sel:a[0])})}}).addTo(map);
+  guLayer.bringToBack()}).catch(()=>{});
+ ORDER.forEach(n=>{const a=AR[n];
+  const ic=L.divIcon({className:'',html:'<span class="pin '+a.cat+'" data-n="'+n+'">'+n+'</span>',iconSize:[0,0]});
+  const m=L.marker([a.lat,a.lon],{icon:ic,zIndexOffset:500}).addTo(map);m.on('click',()=>pick(n));pins[n]=m});
+ setTimeout(()=>map.invalidateSize(),300)}
+function drawMapSel(){document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('sel',p.dataset.n===sel));
+ const c=document.getElementById('guchips');c.innerHTML='<span>상권 선택</span>';
+ ORDER.forEach(n=>{const b=document.createElement('button');b.className='ach'+(n===sel?' sel':'');b.textContent=n+' ('+AR[n].gu+')';b.onclick=()=>pick(n);c.appendChild(b)})}
+/* ---------- 줄 세우기 ---------- */
+function drawTracks(){
+ const box=document.getElementById('tracks');box.innerHTML='';
+ document.getElementById('trk-h').textContent='서울 상권 766곳을 줄 세웠을 때 위치 · 선택: '+sel;
+ const rows=[...IND.map(i=>({k:i.k,lab:i.no+' '+i.lab,sub:i.sub,tp:i.tp,unit:i.unit,pass:i.hi})),{k:'rps',lab:'(참고) 점포당 매출 수준',sub:'이미 뜬 곳 여부. 오른쪽이 높을수록 이미 뜸',tp:75,unit:'백만',pass:false}];
+ rows.forEach(r=>{
+  const row=document.createElement('div');row.className='trow';
+  row.innerHTML='<div class="lb"><b>'+r.lab+'</b><span>'+r.sub+'</span></div>';
+  const t=document.createElement('div');t.className='trk';
+  t.innerHTML='<div class="bar"></div>';
+  const z=document.createElement('div');z.className='zone';
+  if(r.pass){z.style.left=r.tp+'%';z.style.right='0';z.style.borderRadius='0 5px 5px 0'}else{z.style.left='0';z.style.width=r.tp+'%';z.style.background='var(--wrbg)';z.style.borderColor='var(--gold)'}
+  t.appendChild(z);
+  const tl=document.createElement('div');tl.className='tl2';tl.style.left=r.tp+'%';t.appendChild(tl);
+  const lab=document.createElement('div');lab.className='tlab';lab.style.left=r.tp+'%';lab.textContent=r.pass?'기준 (상위 '+(100-r.tp).toFixed(0)+'%)':'상위 25% 선';t.appendChild(lab);
+  const pts=ORDER.map(n=>({n,p:AR[n].pct[r.k],v:r.k=='rps'?AR[n].rps:AR[n][r.k]})).sort((a,b)=>a.p-b.p);
+  pts.forEach((o,i)=>{const mk=document.createElement('div');mk.className='mk';mk.style.left=o.p+'%';mk.style.background=catCol(AR[o.n].cat);mk.title=o.n+' '+f1(o.v)+r.unit+' · 상위 '+(100-o.p)+'%';
+   if(o.n==sel){mk.style.width='22px';mk.style.height='22px';mk.style.marginLeft='-11px';mk.style.top='18px';mk.style.outline='2px solid var(--t1)'}
+   mk.onclick=()=>pick(o.n);t.appendChild(mk);
+   const ml=document.createElement('div');ml.className='ml';ml.style.left=o.p+'%';ml.style.color=catCol(AR[o.n].cat);ml.style[(i%2)?'top':'bottom']=(i%2)?'40px':'10px';
+   ml.textContent=(o.n==sel?'▶ ':'')+o.n+' '+(r.k=='rps'?o.v.toFixed(0):f1(o.v))+r.unit;if(o.n==sel)ml.style.fontSize='.76rem';t.appendChild(ml)});
+  const en=document.createElement('div');en.className='ends';en.innerHTML='<span>하위</span><span>상위</span>';t.appendChild(en);
+  row.appendChild(t);box.appendChild(row)})}
+/* ---------- 점수판 ---------- */
+function drawScore(){
+ const tb=document.getElementById('score');let h='<tr><th class="rl"></th>';
+ ORDER.forEach(n=>h+='<th data-n="'+n+'" class="'+(n===sel?'cs':'')+'" style="color:'+catCol(AR[n].cat)+'">'+n+'</th>');h+='</tr>';
+ const cell=(n,k,v,s,st)=>'<td class="'+st+(n===sel?' cs':'')+'"><span class="v">'+v+'</span><span class="s">'+s+'</span></td>';
+ const row=(lab,sub,fn)=>{h+='<tr><td class="rl">'+lab+'<small>'+sub+'</small></td>';ORDER.forEach(n=>h+=fn(n));h+='</tr>'};
+ row('① 개인 카페 증가','상권 2년 · 인허가 3년 변화',n=>{const a=AR[n];return cell(n,'ig',f1(a.ig)+'%',a.p1?'인허가 '+a.p1:'인허가 미집계',state(n,'ig'))});
+ row('② 20~30대 비중','수준과 2년 변화',n=>{const a=AR[n];return cell(n,'young',a.young.toFixed(1)+'%','변화 '+f1(a.yd)+'%p',state(n,'young'))});
+ row('③ 점포당 월매출','2년 증가 · 현재 수준',n=>{const a=AR[n];return cell(n,'rg',f1(a.rg)+'%',(a.rps*100).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')+'만원',state(n,'rg'))});
+ row('④ 객단가 증가','2년',n=>{const a=AR[n];return cell(n,'tg',f1(a.tg)+'%','',state(n,'tg'))});
+ row('⑤ 상권변동지표','필터',n=>{const a=AR[n];return cell(n,'ix',a.ix,'',state(n,'ix'))});
+ row('최근 영업중 카페','인허가 2022→2025',n=>{const a=AR[n];return '<td class="na'+(n===sel?' cs':'')+'"><span class="v" style="font-size:.78rem">'+(a.p2||'-')+'</span></td>'});
+ row('유튜브 규모','"동네 카페" 중앙 조회수',n=>'<td class="na'+(n===sel?' cs':'')+'"><span class="v" style="font-size:.85rem">'+AR[n].yt.toLocaleString()+'</span></td>');
+ h+='<tr class="sum"><td class="rl">충족 / 일부</td>';ORDER.forEach(n=>{const s=score(n);h+='<td class="'+(n===sel?'cs':'')+'">'+s.ok+' / '+s.wr+'</td>'});h+='</tr>';
+ tb.innerHTML=h;tb.querySelectorAll('th[data-n]').forEach(t=>t.onclick=()=>pick(t.dataset.n))}
+function pick(n){sel=n;drawMapSel();drawTracks();drawScore()}
+/* ---------- 차트 ---------- */
+const Y=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+function drawChart(){const svg=document.getElementById('ch');svg.innerHTML='';const ns='http://www.w3.org/2000/svg',W=640,H=250,L=36,R=64,T=12,B=26;
+ const S={'성수':{c:'--sx',v:AR['성수'].ser},'연남':{c:'--yn',v:AR['연남'].ser},'어린이대공원':{c:'--coral',v:AR['어린이대공원'].ser},'연희':{c:'--yh',v:AR['연희'].ser}};
+ const idx=k=>S[k].v.map(x=>x==null?null:100*x/S[k].v[3]);
+ const mx=Math.max(...Object.keys(S).flatMap(k=>idx(k).filter(x=>x!=null)))*1.05;
+ const X=i=>L+(W-L-R)*i/(Y.length-1),Yp=v=>H-B-(H-B-T)*v/mx;
+ const el=(t,a,txt)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+ [0,100,200].forEach(g=>{if(g<=mx){el('line',{x1:L,x2:W-R,y1:Yp(g),y2:Yp(g),stroke:cv('--bdr')});el('text',{x:L-6,y:Yp(g)+4,'text-anchor':'end','font-size':11,fill:cv('--t3')},g)}});
+ Y.forEach((y,i)=>{if(i%2==1)el('text',{x:X(i),y:H-8,'text-anchor':'middle','font-size':11,fill:cv('--t3')},y)});
+ Object.keys(S).forEach(k=>{const v=idx(k),col=cv(S[k].c);let d='',last=null;
+  v.forEach((x,i)=>{if(x==null)return;d+=(d?'L':'M')+X(i)+' '+Yp(x);el('circle',{cx:X(i),cy:Yp(x),r:3,fill:col});last=[i,x]});
+  el('path',{d,fill:'none',stroke:col,'stroke-width':k=='어린이대공원'?3:2});
+  el('text',{x:X(last[0])+7,y:Yp(last[1])+4,'font-size':12,fill:col,'font-weight':700},k+' '+Math.round(last[1]))})}
+/* ---------- 매장 도식 ---------- */
+const PL={
+ boss:{n:'사장님',s:'낮에는 바 앞, 저녁에는 커피 코스 진행',p:[['co','타투 3개 안팎, 콧수염 또는 턱수염 중 하나, 안경, 아메카지 스타일'],['co','커피만 12년 판 느좋부부 사장이라는 스토리'],['wr','"12년"은 스토리 설정입니다. 실제 운영자 경력과 다르면 홍보 문구로 쓰지 않습니다']]},
+ partner:{n:'공동 운영자 (와이프)',s:'사장님과 대비되는 섬세하고 차분한 인상',p:[['co','섬세하고 차분한 인상의 비주얼 무드로 사장님과 부부 캐릭터 대비를 만듭니다'],['wr','디저트·굿즈 등 역할 분담은 아직 정해지지 않았습니다 (미정)'],['wr','외모를 채용이나 역할 조건으로 삼지 않고 비주얼 무드로만 참고합니다']]},
+ staff:{n:'직원',s:'직원복 = 카페 굿즈 티셔츠',p:[['co','직원은 카페 굿즈 티셔츠를 직원복으로 입습니다'],['wr','입은 모습이 곧 굿즈 홍보 컷이 된다는 가설입니다 (인스타 언급 지표 미측정)']]},
+ bar:{n:'에스프레소 바 (낮)',s:'낮에는 동네 에스프레소 바',p:[['co','낮 시간에는 동네 단골을 위한 에스프레소 바로 운영'],['ok','어린이대공원역 3번 상권 점포당 월매출 +26.2%(1,980만원), 개인 카페 소수(6곳)로 경쟁이 약한 구간'],['wr','평일 낮 유동과 대학·직장 인접 여부는 현장 확인이 필요합니다 (미확인)']]},
+ tasting:{n:'테이스팅 룸 (저녁)',s:'저녁에는 예약제 커피 코스, 어린이대공원 테이스팅 룸',p:[['co','저녁에는 예약제 커피 코스를 운영하는 어린이대공원 테이스팅 룸'],['ok','객단가 +14.2%로 프리미엄을 받아줄 여지가 있음 (어린이대공원역 3번 상권, 2년)'],['wr','저녁 시간대 매출 비중, 코스 가격과 회전율은 검증이 필요합니다'],['wr','코스 구성과 좌석 수는 미정입니다']]},
+ pastry:{n:'디저트 케이스',s:'카다멈 번 중심 이색 베이커리 3종 이내',p:[['co','카다멈 번을 메인으로 한 이색 베이커리를 3종 이내로 판매'],['co','맨날 솔드아웃일 정도로 소량만 판매: 희소성이 방문 이유가 되는 구조'],['wr','일 판매 수량과 원가는 미정입니다']]},
+ goods:{n:'굿즈 선반',s:'커스텀 원두 · 에코백 · 스티커',p:[['co','커스텀 원두, 굿즈 에코백, 스티커를 판매'],['wr','굿즈는 SNS 확산 접점입니다. 인스타 해시태그·계정 언급은 아직 측정하지 못했습니다']]},
+ table:{n:'테이블 · 조명',s:'우드톤 테이블과 따뜻한 조명',p:[['co','망원 빈티지샵에서 팔 것 같은 우드톤의 깔끔한 테이블, 군데군데 따뜻한 조명'],['co','깔끔하고 포근한 소규모 커뮤니티형 공간 (핀터레스트 감성)'],['ok','어린이대공원역 3번 상권 20~30대 유동 비중 61.2%(서울 상위 2%)로 취향 타겟과 연결']]},
+ music:{n:'음악',s:'Yusuf Dayes 같은 플레이리스트',p:[['co','Yusuf Dayes 같은 결의 플레이리스트를 매장 시그니처 무드로 사용'],['wr','플레이리스트를 공유 콘텐츠로 확장하는 아이디어는 가설입니다']]}};
+const PK=['boss','partner','staff','bar','pastry','tasting','goods','table','music'],TG={ok:'데이터',wr:'가설·미확인',co:'컨셉'};
+let psel=null;
+function drawPlan(){
+ document.querySelectorAll('#fp .pe').forEach(g=>g.classList.toggle('on',g.dataset.k===psel));
+ const c=document.getElementById('pchips');c.innerHTML='';
+ PK.forEach(k=>{const b=document.createElement('button');b.className='pc'+(k===psel?' on':'');b.textContent=PL[k].n.replace(/ \(.*\)/,'');b.onclick=()=>openPop(k,document.querySelector('#fp .pe[data-k="'+k+'"]'));c.appendChild(b)})}
+function openPop(k,el){
+ psel=k;const e=PL[k],pop=document.getElementById('pop'),w=document.getElementById('planw');
+ pop.innerHTML='<button class="x" aria-label="닫기">×</button><div class="lab">'+(['boss','partner','staff'].includes(k)?'PEOPLE':'SPACE & MENU')+'</div><h3>'+e.n+'</h3><div class="sub">'+e.s+'</div><ul>'+e.p.map(x=>'<li><span class="tg '+x[0]+'">'+TG[x[0]]+'</span>'+x[1]+'</li>').join('')+'</ul>';
+ pop.querySelector('.x').onclick=()=>{psel=null;pop.classList.remove('show');drawPlan()};
+ pop.classList.add('show');
+ if(window.innerWidth>640&&el){const r=el.getBoundingClientRect(),wr=w.getBoundingClientRect(),pw=pop.offsetWidth,ph=pop.offsetHeight;
+  let left=r.right-wr.left+14;if(left+pw>wr.width)left=r.left-wr.left-pw-14;if(left<4)left=4;
+  let top=r.top-wr.top+(r.height/2)-ph/2;top=Math.max(4,Math.min(top,wr.height-ph-4));pop.style.left=left+'px';pop.style.top=top+'px'}
+ drawPlan()}
+document.querySelectorAll('#fp .pe').forEach(g=>g.addEventListener('click',ev=>{ev.stopPropagation();openPop(g.dataset.k,g)}));
+document.getElementById('fp').addEventListener('click',()=>{psel=null;document.getElementById('pop').classList.remove('show');drawPlan()});
+/* ---------- 공통 ---------- */
+const root=document.documentElement;
+document.getElementById('tb').onclick=function(){const d=root.dataset.theme==='dark';root.dataset.theme=d?'light':'dark';this.textContent=d?'다크':'라이트';drawChart();drawTracks();drawMapSel()};
+const secs=[...document.querySelectorAll('.sec')],links=[...document.querySelectorAll('#nav a')];
+function onS(){const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);document.getElementById('pb').style.width=(p*100)+'%';
+ let cur=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<120)cur=i});links.forEach((a,i)=>a.classList.toggle('on',i===cur))}
+addEventListener('scroll',onS,{passive:true});onS();
+initMap();pick('어린이대공원');drawChart();drawPlan();
+</script>
+</body></html>
