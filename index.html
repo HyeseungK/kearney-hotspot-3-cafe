@@ -246,7 +246,7 @@ body{background:var(--bg)}
 <p style="font-size:.84rem;color:var(--t2);margin-bottom:10px">구에 마우스를 올리면 해당 구의 상권이 표시되고, 구 또는 이름표를 클릭하면 아래 지표가 선택한 상권 기준으로 전환됩니다.</p>
 <div id="map"></div>
 <div class="guchips" id="guchips"></div>
-<div class="note"><span style="color:var(--coral)">●</span> 후보(약수·문래는 관심 동네, 어린이대공원은 스크리닝 1위) &nbsp;<span style="color:var(--sx)">●</span> 기준 상권 &nbsp;· 지도: CARTO·OpenStreetMap, 구 경계: 통계청 2013 행정구역(southkorea/seoul-maps). 약수역은 중구·성동구 경계 일대로 중구에 표시했습니다.</div></div>
+<div class="note"><span style="color:var(--coral)">●</span> 후보(약수·문래는 관심 동네, 어린이대공원은 스크리닝 1위) &nbsp;<span style="color:var(--sx)">●</span> 기준 상권 &nbsp;· 지도 타일: Esri, 구 경계: 통계청 2013 행정구역(southkorea/seoul-maps). 약수역은 중구·성동구 경계 일대로 중구에 표시했습니다.</div></div>
 
 <div class="nr card"><h3 id="trk-h">서울 상권 766곳을 줄 세웠을 때 위치</h3>
 <p style="font-size:.84rem;color:var(--t2);margin-bottom:6px">왼쪽이 하위, 오른쪽이 상위입니다. 초록 구간이 기준 통과 범위이고, 점은 각 상권의 위치입니다.</p>
@@ -409,6 +409,8 @@ body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;backgro
 .cnt{font:700 .9rem 'Noto Sans KR',sans-serif;color:var(--coral);margin-left:8px}
 @media(max-width:600px){.cb{grid-template-columns:84px 1fr 62px}}
 .cn{position:absolute;width:1px;background:var(--bdr-h)}.trk .ends{display:none}.trk .ml{font-size:.74rem}
+.pin{transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px)))}.pin.sel{transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) scale(1.12)}
+.trk .ml{text-align:center;line-height:1.2;font-size:inherit}.trk .ml .nm{display:block;font-size:1rem;font-weight:800}.trk .ml .nv{display:block;font-size:.7rem;font-weight:600;opacity:.85;margin-top:2px}.trk .ml.sel .nm{font-size:1.08rem}
 </style>
 <h3 style="margin-bottom:2px">데이터</h3>
 <ol class="refs">
@@ -422,7 +424,7 @@ body{font-family:'Noto Sans KR',-apple-system,'Malgun Gothic',sans-serif;backgro
 <h3 style="margin:18px 0 2px">지도·자료</h3>
 <ol class="refs">
 <li><div><b>서울 행정구역(구) 경계</b><span>통계청 2013 행정구역 기반 GeoJSON · southkorea/seoul-maps</span><br><a href="https://github.com/southkorea/seoul-maps" target="_blank" rel="noopener">github.com/southkorea/seoul-maps</a></div></li>
-<li><div><b>지도 타일</b><span>© OpenStreetMap contributors, © CARTO</span><br><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">openstreetmap.org/copyright</a> · <a href="https://carto.com/attributions" target="_blank" rel="noopener">carto.com/attributions</a></div></li>
+<li><div><b>지도 타일</b><span>Esri, World Light Gray Base · Tiles © Esri</span><br><a href="https://www.arcgis.com/home/item.html?id=ed712cb1db3e4bae9e85329040fb9a49" target="_blank" rel="noopener">arcgis.com (World Light Gray Base)</a></div></li>
 <li><div><b>지도 라이브러리 및 서체</b><span>Leaflet 1.9.4 · Noto Sans KR · Noto Serif KR (Google Fonts)</span><br><a href="https://leafletjs.com" target="_blank" rel="noopener">leafletjs.com</a> · <a href="https://fonts.google.com" target="_blank" rel="noopener">fonts.google.com</a></div></li>
 </ol>
 <h3 style="margin:18px 0 2px">산출 방법 요약</h3>
@@ -465,7 +467,7 @@ function initMap(){
  const box=document.getElementById('map');
  if(typeof L==='undefined'){box.innerHTML='<div style="padding:30px;color:var(--t3)">지도 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요. 아래 칩으로 상권을 선택할 수 있습니다.</div>';return}
  map=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([37.545,126.99],11);
- L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'&copy; OpenStreetMap contributors &copy; CARTO'}).addTo(map);
+ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,attribution:'Tiles &copy; Esri'}).addTo(map);
  fetch('https://raw.githubusercontent.com/southkorea/seoul-maps/master/kostat/2013/json/seoul_municipalities_geo_simple.json').then(r=>r.json()).then(g=>{
   guLayer=L.geoJSON(g,{style:f=>{const a=byGu[f.properties.name];return a?{color:cv('--coral'),weight:1.5,fillColor:catCol(AR[a[0]].cat),fillOpacity:.22}:{color:'#8a7a68',weight:1,fillOpacity:0}},
    onEachFeature:(f,l)=>{const nm=f.properties.name,a=byGu[nm];
@@ -475,7 +477,9 @@ function initMap(){
     l.on('click',()=>{if(a)pick(a.includes(sel)?sel:a[0])})}}).addTo(map);
   guLayer.bringToBack()}).catch(()=>{});
  ORDER.forEach(n=>{const a=AR[n];
-  const ic=L.divIcon({className:'',html:'<span class="pin '+a.cat+'" data-n="'+n+'">'+n+'</span>',iconSize:[0,0]});
+  const POFF={'성수':[-46,22],'어린이대공원':[58,-18],'연희':[34,-26],'연남':[-40,20],'약수':[0,-18],'문래':[0,-18]},o=POFF[n]||[0,0];
+  const ic=L.divIcon({className:'',html:'<span class="pin '+a.cat+'" data-n="'+n+'" style="--dx:'+o[0]+'px;--dy:'+o[1]+'px">'+n+'</span>',iconSize:[0,0]});
+  L.circleMarker([a.lat,a.lon],{radius:5,color:'#fff',weight:2,fillColor:catCol(a.cat),fillOpacity:1,interactive:false}).addTo(map);
   const m=L.marker([a.lat,a.lon],{icon:ic,zIndexOffset:500}).addTo(map);m.on('click',()=>pick(n));pins[n]=m});
  setTimeout(()=>map.invalidateSize(),300)}
 function drawMapSel(){document.querySelectorAll('.pin').forEach(p=>p.classList.toggle('sel',p.dataset.n===sel));
@@ -483,17 +487,17 @@ function drawMapSel(){document.querySelectorAll('.pin').forEach(p=>p.classList.t
  ORDER.forEach(n=>{const b=document.createElement('button');b.className='ach'+(n===sel?' sel':'');b.textContent=n+' ('+AR[n].gu+')';b.onclick=()=>pick(n);c.appendChild(b)})}
 /* ---------- 줄 세우기 ---------- */
 function placeLabels(t,pts,r){
- const W=t.clientWidth||600,rows=[];let maxRow=0;
+ const W=t.clientWidth||600,rows=[],PITCH=44;let maxRow=0;
  pts.forEach(o=>{
-  const txt=(o.n==sel?'▶ ':'')+o.n+' '+(r.k=='rps'?o.v.toFixed(0):f1(o.v))+r.unit;
-  const ml=document.createElement('div');ml.className='ml';ml.style.color=catCol(AR[o.n].cat);ml.textContent=txt;ml.style.top='0px';ml.style.left='0px';
-  if(o.n==sel){ml.style.fontSize='.8rem';ml.style.fontWeight='800'}t.appendChild(ml);
-  const w=ml.offsetWidth+10,x=o.p/100*W,left=Math.min(Math.max(x,w/2),W-w/2);
+  const val=(r.k=='rps'?o.v.toFixed(0):f1(o.v))+r.unit;
+  const ml=document.createElement('div');ml.className='ml'+(o.n==sel?' sel':'');ml.style.color=catCol(AR[o.n].cat);
+  ml.innerHTML='<span class="nm">'+(o.n==sel?'▶ ':'')+o.n+'</span><span class="nv">'+val+'</span>';ml.style.top='0px';ml.style.left='0px';t.appendChild(ml);
+  const w=ml.offsetWidth+12,x=o.p/100*W,left=Math.min(Math.max(x,w/2),W-w/2);
   let ri=0;while(rows[ri]!==undefined&&rows[ri]>left-w/2)ri++;
   rows[ri]=left+w/2;maxRow=Math.max(maxRow,ri);
-  const top=50+ri*24;ml.style.left=left+'px';ml.style.top=top+'px';
-  const cn=document.createElement('div');cn.className='cn';cn.style.left=x+'px';cn.style.top='36px';cn.style.height=(top-36)+'px';t.insertBefore(cn,ml)});
- t.style.height=(50+(maxRow+1)*24+10)+'px'}
+  const top=46+ri*PITCH;ml.style.left=left+'px';ml.style.top=top+'px';
+  const cn=document.createElement('div');cn.className='cn';cn.style.left=x+'px';cn.style.top='34px';cn.style.height=(top-34)+'px';t.insertBefore(cn,ml)});
+ t.style.height=(46+(maxRow+1)*PITCH+6)+'px'}
 addEventListener('resize',()=>{clearTimeout(window.__rz);window.__rz=setTimeout(()=>{if(typeof drawTracks==='function')drawTracks()},150)});
 function drawTracks(){
  const box=document.getElementById('tracks');box.innerHTML='';
