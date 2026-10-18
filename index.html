@@ -124,11 +124,42 @@ svg{max-width:100%}
 .pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .pc{border:1px solid var(--bdr);background:var(--bg-s);color:var(--t2);border-radius:20px;padding:4px 11px;font:600 .78rem 'Pretendard',inherit;cursor:pointer}.pc.on{background:var(--coral);border-color:var(--coral);color:#fff}
 @media(max-width:640px){.wrap{padding:32px 16px 0}.hdr h1{font-size:1.4rem}.collage{justify-content:center}.pol{width:104px}.pop{position:static;width:100%;max-width:none;margin-top:10px}}
+
+/* ===== Pinterest-style skin ===== */
+:root{--bg:#F6F0E6;--bg-s:#FFFFFF;--bg-e:#EFE5D6}
+[data-theme="dark"]{--bg:#1A130D;--bg-s:#241B13;--bg-e:#2D2218}
+body{background:var(--bg)}
+.nr{border:none!important;border-radius:28px!important;box-shadow:0 1px 3px rgba(70,45,25,.06),0 12px 32px rgba(70,45,25,.08)!important}
+.xbox{border-radius:20px}
+.card{padding:26px}
+.sec h2{font-size:2rem;letter-spacing:-.8px}
+.nav{top:12px;margin:12px auto 0;width:max-content;max-width:calc(100% - 24px);border-radius:999px;border:1px solid var(--bdr);box-shadow:0 8px 24px rgba(70,45,25,.14)}
+.nav-in{padding:0 12px;height:46px}.nav a{border-radius:999px;padding:7px 14px}.nav a.on{background:var(--coral);color:#fff}
+.pt{display:none}
+.hdr{border-radius:32px;padding:44px 40px 34px}.hdr h1{font-size:2.6rem;letter-spacing:-1.5px}
+.chip{padding:7px 16px;font-size:.84rem;border-radius:999px}
+.g3,.g5{display:block!important;column-count:3;column-gap:16px}
+.g3>*,.g5>*{break-inside:avoid;margin-bottom:16px;display:block}
+.g5{column-count:2}
+@media(max-width:900px){.g3{column-count:2}}
+@media(max-width:600px){.g3,.g5{column-count:1}.hdr h1{font-size:1.7rem}}
+.kc,.gl,.ic{transition:transform .2s}.kc:hover,.gl:hover,.ic:hover{transform:translateY(-4px)}
+.ic .crit{border-radius:14px}
+.method div{border-radius:16px;border:none;box-shadow:0 1px 3px rgba(70,45,25,.06)}
+/* moodboard */
+.mb{column-count:4;column-gap:14px;margin-top:6px}
+.tile{break-inside:avoid;margin-bottom:14px;border-radius:26px;overflow:hidden;position:relative;box-shadow:0 10px 26px rgba(70,45,25,.14);transition:transform .25s}
+.tile:hover{transform:translateY(-5px) rotate(-.4deg)}
+.tile svg{display:block;width:100%;height:auto}
+.tile .cap{position:absolute;left:14px;bottom:12px;background:rgba(255,251,242,.92);color:#5A4636;font-size:.72rem;font-weight:700;padding:4px 11px;border-radius:999px}
+.tile.txt{padding:24px 22px;color:#fff}.tile.txt b{display:block;font-size:1.25rem;line-height:1.35;letter-spacing:-.4px}.tile.txt span{display:block;margin-top:10px;font-size:.78rem;opacity:.85}
+.tile.stat{background:#FFFBF2;color:#3A2A1E;padding:24px 22px}.tile.stat .n{font-size:2.8rem;font-weight:800;color:#B5651D;letter-spacing:-1.5px;line-height:1}.tile.stat span{display:block;font-size:.8rem;color:#7A6552;margin-top:8px}
+@media(max-width:900px){.mb{column-count:3}}@media(max-width:600px){.mb{column-count:2}}
 </style>
 </head>
 <body>
 <nav class="nav"><div class="nav-in" id="nav">
-<a href="#s1">뜬다의 정의</a><a href="#s2">지표 정의</a><a href="#s3">분석 결과</a><a href="#s4">1위 논의</a><a href="#sc">매장 컨셉</a><a href="#s5">한계</a><a href="#s6">출처</a>
+<a href="#mood">무드</a><a href="#motion">영상</a><a href="#s1">뜬다의 정의</a><a href="#s2">지표 정의</a><a href="#s3">분석 결과</a><a href="#s4">1위 논의</a><a href="#sc">매장 컨셉</a><a href="#s5">한계</a><a href="#s6">출처</a>
 <span class="sp"></span><button class="tbtn" id="tb">다크</button></div><div class="pt"><div class="pb" id="pb"></div></div></nav>
 
 <div class="wrap">
@@ -143,7 +174,27 @@ svg{max-width:100%}
   </div>
 </div>
 
+
+<section class="sec" id="mood" style="margin-top:36px">
+<div class="lab">MOODBOARD</div><h2>어린이대공원 테이스팅 룸의 무드</h2>
+<p class="lead">컨셉을 시각화한 일러스트 무드보드입니다. 실제 매장 이미지가 아니며, 색과 분위기의 방향을 보여 줍니다.</p>
+<div class="mb">
+<div class="tile"><svg viewBox="0 0 300 380"><rect width="300" height="380" fill="#D9C2A0"/><circle cx="150" cy="190" r="118" fill="#F3E9D8"/><circle cx="150" cy="190" r="118" fill="none" stroke="#C9AE86" stroke-width="3"/><circle cx="150" cy="186" r="78" fill="#fff"/><radialGradient id="e1" cx="40%" cy="38%"><stop offset="0" stop-color="#C58A4E"/><stop offset="1" stop-color="#6E411F"/></radialGradient><circle cx="150" cy="186" r="66" fill="url(#e1)"/><path d="M108 178 q42 -28 84 0" fill="none" stroke="#E7C59A" stroke-width="6" stroke-linecap="round"/><path d="M230 190 q34 6 44 24" fill="none" stroke="#C9AE86" stroke-width="8" stroke-linecap="round"/></svg><span class="cap">낮 · 동네 에스프레소 바</span></div>
+<div class="tile txt" style="background:#B5651D"><b>낮에는 동네 에스프레소 바,<br>저녁에는 예약제 커피 코스</b><span>어린이대공원 테이스팅 룸</span></div>
+<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#E6D3B4"/><circle cx="150" cy="150" r="112" fill="#D79A55"/><circle cx="150" cy="150" r="112" fill="none" stroke="#B87A3A" stroke-width="6"/><path d="M150 150 m0 0 a14 14 0 1 1 14 14 a28 28 0 1 1 -28 -28 a42 42 0 1 1 42 42 a56 56 0 1 1 -56 -56 a70 70 0 1 1 70 70" fill="none" stroke="#9B5F26" stroke-width="9" stroke-linecap="round"/><circle cx="96" cy="96" r="5" fill="#F4E2BE"/><circle cx="208" cy="104" r="5" fill="#F4E2BE"/><circle cx="196" cy="214" r="5" fill="#F4E2BE"/><ellipse cx="258" cy="266" rx="14" ry="7" fill="#7E9A5C" transform="rotate(-30 258 266)"/></svg><span class="cap">카다멈 번 · 매일 완판</span></div>
+<div class="tile stat"><div class="n">61.2%</div><span>20~30대 유동 비중 · 서울 상권 766곳 중 상위 2% (어린이대공원역 3번 상권)</span></div>
+<div class="tile"><svg viewBox="0 0 300 420"><rect width="300" height="420" fill="#3A2A1E"/><radialGradient id="lg" cx="50%" cy="30%"><stop offset="0" stop-color="#FFD58A" stop-opacity=".95"/><stop offset="1" stop-color="#FFD58A" stop-opacity="0"/></radialGradient><circle cx="150" cy="110" r="150" fill="url(#lg)"/><path d="M110 90 q40 -50 80 0 z" fill="#E9C27A"/><rect x="146" y="90" width="8" height="150" fill="#6B4B33"/><rect x="0" y="300" width="300" height="120" fill="#A9794F"/><rect x="0" y="300" width="300" height="10" fill="#7B5636"/><circle cx="80" cy="330" r="30" fill="#B98B5E"/><circle cx="220" cy="345" r="26" fill="#B98B5E"/></svg><span class="cap">우드 테이블 · 따뜻한 조명</span></div>
+<div class="tile"><svg viewBox="0 0 300 300"><rect width="300" height="300" fill="#2B2018"/><circle cx="150" cy="150" r="112" fill="#17110C"/><circle cx="150" cy="150" r="92" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="70" fill="none" stroke="#3A2A1E" stroke-width="3"/><circle cx="150" cy="150" r="38" fill="#B5651D"/><circle cx="150" cy="150" r="5" fill="#17110C"/><rect x="214" y="40" width="64" height="10" rx="5" fill="#D79A5B" transform="rotate(30 246 45)"/></svg><span class="cap">플레이리스트 · Yusuf Dayes 무드</span></div>
+<div class="tile"><svg viewBox="0 0 300 340"><rect width="300" height="340" fill="#EFE2CC"/><path d="M80 120 h140 l14 190 h-168 z" fill="#F7EEDC" stroke="#C9AE86" stroke-width="3"/><path d="M110 120 q0 -60 40 -60 q40 0 40 60" fill="none" stroke="#B98B5E" stroke-width="8"/><circle cx="150" cy="212" r="38" fill="#B5651D"/><text x="150" y="220" text-anchor="middle" font-size="22" font-weight="800" fill="#fff" font-family="Malgun Gothic,sans-serif">TR</text><circle cx="248" cy="64" r="26" fill="#D79A5B"/><circle cx="52" cy="290" r="22" fill="#7E9A5C"/></svg><span class="cap">에코백 · 스티커 · 커스텀 원두</span></div>
+<div class="tile" style="background:#fff"><svg viewBox="0 0 300 150"><rect width="60" height="150" x="0" fill="#EFE5D6"/><rect width="60" height="150" x="60" fill="#B98B5E"/><rect width="60" height="150" x="120" fill="#7B5636"/><rect width="60" height="150" x="180" fill="#B5651D"/><rect width="60" height="150" x="240" fill="#FFD58A"/><text x="30" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">크림</text><text x="90" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">우드</text><text x="150" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">로스트</text><text x="210" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Malgun Gothic,sans-serif">카라멜</text><text x="270" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#5A4636" font-family="Malgun Gothic,sans-serif">조명</text></svg><span class="cap">컬러 팔레트</span></div>
+</div></section>
 <!-- 01 -->
+
+<section class="sec" id="motion" style="margin-top:36px">
+<div class="lab">MOTION</div><h2>왜 다음은 어린이대공원인가</h2>
+<p class="lead">서울 상권 766곳을 같은 5개 지표로 비교한 결과를 13초로 요약했습니다.</p>
+<div class="nr" style="padding:14px;border-radius:28px"><video src="motion.mp4" controls muted loop playsinline preload="metadata" style="width:100%;border-radius:20px;display:block;background:#EFE5D6"></video></div>
+</section>
 <section class="sec" id="s1">
 <div class="lab">01 · DEFINITION</div><h2>"뜬다"의 정의</h2>
 <div class="method"><div><b>도구</b>서울 열린데이터광장 · 성수 사례</div><span class="ar">→</span><div><b>분석</b>성수가 뜰 때 무엇이 먼저 움직였는지 관찰</div><span class="ar">→</span><div><b>결론</b>숫자로 판정할 수 있는 한 줄 정의</div></div>
