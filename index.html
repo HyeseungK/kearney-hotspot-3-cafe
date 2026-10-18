@@ -276,7 +276,13 @@ body{background:var(--bg)}
 <p class="note">열 제목을 누르면 정렬됩니다. 점수만큼 왼쪽부터 채워집니다(● 충족 1점, ◐ 일부 0.5점). 어떤 지표를 충족했는지는 점수 칸에 마우스를 올리면 보입니다. 인접 지지도는 반경 800m 안 이웃 상권 점수의 거리 가중 평균(괄호는 이웃 수)이며, 순위와 점수에는 반영하지 않은 참고 열입니다. <span class="tg2 me">우리 후보</span> <span class="tg2 rf">기준 상권</span> <span class="tg2 ot">함께 살펴본 상권</span></p>
 </details></div>
 <div class="nr card" id="clu" style="margin-top:14px"><h3>인접 상권 묶음: 같은 생활권끼리 묶어 비교</h3>
-<p style="font-size:.86rem;color:var(--t2);margin-bottom:10px">점수가 높은 상권부터 차례로, 반경 안에 있는 인접 상권을 한 묶음으로 모았습니다. 묶음 안에서 점수가 가장 높은 상권이 대표(1위)이고, 묶음 순위는 대표 상권의 점수, 같으면 묶음 평균 점수 순입니다. 위의 전수 순위는 그대로이며, 이 카드는 같은 점수를 생활권 단위로 다시 본 것입니다.</p>
+<div class="why"><b>왜 묶었나</b>
+<ul>
+<li><b>손님은 상권 경계를 모릅니다.</b> 걸어서 10분 안의 가까운 상권들은 같은 사람들이 오가는 하나의 생활권입니다.</li>
+<li><b>주변이 함께 오르면 더 믿을 수 있습니다.</b> 한 상권만 높은 곳은 일시적인 쏠림일 수 있지만, 이웃 상권도 함께 높은 곳은 수요가 퍼지는 중이라는 신호입니다.</li>
+<li><b>작은 상권의 숫자 흔들림을 줄입니다.</b> 개인 카페가 몇 곳뿐인 상권은 한두 점포에 수치가 출렁이는데, 생활권 단위로 보면 그 흔들림이 완화됩니다.</li>
+<li><b>출점 판단의 순서와 같습니다.</b> 먼저 어느 동네로 들어갈지 정하고, 그다음 그 동네 안에서 어느 자리가 좋은지 고릅니다.</li></ul></div>
+<p style="font-size:.86rem;color:var(--t2);margin:10px 0">묶는 방법은 간단합니다. 점수가 높은 상권부터 차례로, 반경 안에 있는 인접 상권을 한 묶음으로 모았습니다. 묶음 안에서 점수가 가장 높은 상권이 대표(1위)이고, 묶음 순위는 대표 상권의 점수, 같으면 묶음 평균 점수 순입니다. 위의 전수 순위는 그대로이며, 이 카드는 같은 점수를 생활권 단위로 다시 본 것입니다.</p>
 <div class="tabs2" id="cluTabs"></div>
 <div id="cluNote" class="note" style="margin:0 0 10px"></div>
 <div id="cluList"></div>
@@ -490,6 +496,7 @@ table.at{min-width:1010px}
 .clb .bt i{display:block;height:100%;background:#C9B9A6;border-radius:7px}.clb .bt i.t{background:var(--coral)}
 .clb .bc span{font-size:.76rem;font-weight:800;min-width:54px;text-align:right;font-variant-numeric:tabular-nums}
 @media(max-width:760px){.clb .clg{grid-template-columns:1fr}.clb .clg.head{display:none}}
+.why{background:#F3ECE2;border-radius:16px;padding:14px 18px;margin-bottom:6px;font-size:.88rem}.why>b{display:block;font-size:.78rem;letter-spacing:.06em;color:var(--coral);margin-bottom:4px}.why ul{margin:0;padding-left:18px}.why li{margin:5px 0;font-size:.86rem;line-height:1.6}
 </style>
 <h3 style="margin-bottom:2px">데이터</h3>
 <ol class="refs">
